@@ -27,6 +27,15 @@ function Home() {
           <Link href="/">
             <a>next-web3-boilerplate</a>
           </Link>
+          <Link href="/stake">
+            <a>next-web3-boilerplate</a>
+          </Link>
+          <Link href="/unstake">
+            <a>next-web3-boilerplate</a>
+          </Link>
+          <Link href="/claim">
+            <a>next-web3-boilerplate</a>
+          </Link>
 
           <Account triedToEagerConnect={triedToEagerConnect} />
         </nav>
