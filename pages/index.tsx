@@ -3,6 +3,8 @@ import Head from "next/head";
 import Link from "next/link";
 import Account from "../components/Account";
 import ETHBalance from "../components/ETHBalance";
+import Header from "../components/Header";
+import Layout from "../components/Layout";
 import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 
@@ -17,57 +19,31 @@ function Home() {
 
   return (
     <div>
-      <Head>
-        <title>next-web3-boilerplate</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Header />
+      <Layout>
+          <main>
+            <h1>
+              Welcome to{" "}
+              <a href="https://github.com/mirshko/next-web3-boilerplate">
+                next-web3-boilerplate
+              </a>
+            </h1>
 
-      <header>
-        <nav>
-          <Link href="/">
-            <a>next-web3-boilerplate</a>
-          </Link>
-          <Link href="/stake">
-            <a>next-web3-boilerplate</a>
-          </Link>
-          <Link href="/unstake">
-            <a>next-web3-boilerplate</a>
-          </Link>
-          <Link href="/claim">
-            <a>next-web3-boilerplate</a>
-          </Link>
+            {isConnected && (
+              <section>
+                <ETHBalance />
 
-          <Account triedToEagerConnect={triedToEagerConnect} />
-        </nav>
-      </header>
+                <TokenBalance tokenAddress={DAI_TOKEN_ADDRESS} symbol="DAI" />
+              </section>
+            )}
+          </main>
 
-      <main>
-        <h1>
-          Welcome to{" "}
-          <a href="https://github.com/mirshko/next-web3-boilerplate">
-            next-web3-boilerplate
-          </a>
-        </h1>
-
-        {isConnected && (
-          <section>
-            <ETHBalance />
-
-            <TokenBalance tokenAddress={DAI_TOKEN_ADDRESS} symbol="DAI" />
-          </section>
-        )}
-      </main>
-
-      <style jsx>{`
-        nav {
-          display: flex;
-          justify-content: space-between;
-        }
-
-        main {
-          text-align: center;
-        }
-      `}</style>
+          <style jsx>{`
+            main {
+              text-align: center;
+            }
+          `}</style>
+      </Layout>
     </div>
   );
 }

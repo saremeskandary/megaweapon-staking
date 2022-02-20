@@ -1,9 +1,12 @@
-import React from 'react'
+import Header from "../components/Header";
+import Layout from "../components/Layout";
 
-type Props = {}
+type Props = {};
 
 export default function claim({}: Props) {
   return (
-    <div>claim</div>
-  )
+    <Header>
+      <div>claim</div>
+    </Header>
+  );
 }

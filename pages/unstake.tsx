@@ -1,9 +1,11 @@
-import React from 'react'
+import Layout from "../components/Layout";
 
-type Props = {}
+type Props = {};
 
 export default function unstake({}: Props) {
   return (
-    <div>unstake</div>
-  )
+    <Layout>
+      <div>unstake</div>
+    </Layout>
+  );
 }

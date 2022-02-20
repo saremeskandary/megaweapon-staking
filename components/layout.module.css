@@ -1,0 +1,11 @@
+.container {
+  position: absolute;
+  width: 100%;
+	height: 100%;
+  padding: 0 1rem;
+  margin: 3rem auto 6rem;
+  background-image: url("../public/assets/ELEMENTS-PC/bkgnd-main-PC.png");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
