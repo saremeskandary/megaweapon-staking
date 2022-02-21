@@ -42,7 +42,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
 
   if (typeof account !== "string") {
     return (
-      <div>
+      <div className="">
         {isWeb3Available ? (
           <button
             disabled={connecting}

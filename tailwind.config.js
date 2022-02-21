@@ -20,6 +20,7 @@ module.exports = {
       'gray-dark': '#273444',
       'gray': '#8492a6',
       'gray-light': '#d3dce6',
+      'night': '#0f1f3a',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'], //TODO add font
@@ -27,7 +28,7 @@ module.exports = {
     },
     extend: {    
       backgroundImage: theme => ({
-        'header-image': "url('../public/assets/ELEMENTS-PC/bkgnd-header-PC.png')",
+        'header': "url('../public/assets/ELEMENTS-PC/bkgnd-header-stroke-PC.png')",
         'main': "url('../public/assets/ELEMENTS-PC/bkgnd-main-PC.png')",
       }),    
     },
