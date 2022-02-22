@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 interface IButton {
   onClick: any;
   kind: "dark" | "light";
-  lock?: "icon-addstake" |
-  "icon-addstake-selected" |
-  "icon-extendstake-default" |
-  "icon-extendstake-selected" |
-  "icon-extendstake-selected" |
-  "icon-stake-defaut";
+  lock?:
+    | "icon-addstake"
+    | "icon-addstake"
+    | "icon-extendstake"
+    | "icon-extendstake"
+    | "icon-extendstake"
+    | "icon-stake";
   content: string;
 }
 
@@ -18,31 +19,40 @@ export function Button({ onClick, kind = "light", lock, content }: IButton) {
   const dark = "bg-cardbg-dark text-gray-100  border-gray-100";
   const [selected, setSelected] = useState<boolean>(false);
   const [lockTheme, setLockTheme] = useState<"default" | "selected">();
+  const mlight = "border-gray-100";
+  const mdark = "border-black";
+  const [middleBorder, setMiddleBorder] = useState<string>();
   const [style, setStyle] = useState<string>();
+
   useEffect(() => {
-    switch (kind && selected) {
-      case "light" && false:
+    switch (true) {
+      case kind === "dark" && selected === false:
         setLockTheme("default");
         setStyle(light);
+
+        setMiddleBorder(mdark);
         break;
-      case "dark" && true:
+      case kind === "light" && selected === false:
+        setLockTheme("selected");
+        setStyle(dark);
+        setMiddleBorder(mlight);
+        break;
+      case kind === "dark" && selected === false:
+        setLockTheme("selected");
+        setStyle(dark);
+        setMiddleBorder(mlight);
+        break;
+      case kind === "light" && selected === true:
         setLockTheme("default");
-        setStyle(dark);
-        break;
-      case "dark" && false:
-        setLockTheme("selected");
-        setStyle(dark);
-        break;
-      case "light" && true:
-        setLockTheme("selected");
         setStyle(light);
+        setMiddleBorder(mdark);
         break;
 
       default:
         console.error("something is wrong");
         break;
     }
-  }, [kind, selected]);
+  }, [kind, selected, lockTheme, style]);
 
   return (
     <div
@@ -53,13 +63,14 @@ export function Button({ onClick, kind = "light", lock, content }: IButton) {
     >
       <div className="px-2 py-1">{content}</div>
       {lock && (
-        <div className="flex px-2 py-1 border-l-2 border-night">
+        <div className={`flex px-2 py-1 border-l-2 ${middleBorder} `}>
           <Image
             src={`/../public/assets/${lock}-${lockTheme}.png`}
             alt="lock"
             width="25"
             height="25"
-            className="self-center" />
+            className="self-center"
+          />
         </div>
       )}
     </div>
