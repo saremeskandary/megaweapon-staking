@@ -31,10 +31,10 @@ export default function Header({ children }: any) {
   return (
     <div>
       <header>
-        <div className="bg-header w-screen border-b-2">
-          <div className="flex justify-center self-center">
-            <div>
-              <div className="flex flex-row justify-between max-w-lg w-96 items-center">
+        <div className="flex justify-center bg-header w-screen border-b-2">
+          <div className="flex justify-center self-center w-1/2">
+            <div className="w-full">
+              <div className="flex flex-row w-full justify-between items-center ">
                 <div className="flex flex-row justify-between gap-1 p-1">
                   <Image
                     src="/../public/assets/ELEMENTS/graphic/header/gfx-mwstamp.png"
@@ -51,15 +51,13 @@ export default function Header({ children }: any) {
                 </div>
                 <Account triedToEagerConnect={triedToEagerConnect} />
               </div>
-              <div className="text-center">
-                Your ETH rewards: 3 ETH
-              </div>
+              <div className="text-center">Your ETH rewards: 3 ETH</div>
             </div>
           </div>
         </div>
 
         <nav className="flex justify-center self-center ">
-          <div className="flex flex-row max-w-xl w-96 ">
+          <div className="flex flex-row w-1/2">
             <Link href="/stake">
               <a>
                 <NavButton>stake</NavButton>
