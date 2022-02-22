@@ -11,7 +11,7 @@ function NavImage(props: { name: string }) {
     width = "150";
   return (
     <div
-      className={`flex relative item-center text-center -mx-2 md:-mx-1 lg:mx-0  text-night ${
+      className={`flex relative item-center text-center -mx-2 md:-mx-1 lg:mx-0  text-night bg- ${
         selected && "gray-100"
       }`}
       onMouseOver={() => setSelected(true)}
