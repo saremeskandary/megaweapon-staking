@@ -25,12 +25,12 @@ export default function stake() {
       />
 
       <Card>
-        <div className="flex flex-col w-full">
-          <div className="flex flex-col md:flex-row flex-wrap justify-between w-full p-2">
+        <div className="flex flex-col w-full justify-center items-center md:items-stretch">
+          <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
             <div>Your balance</div>
             <div>3 $WEPON</div>
           </div>
-          <div className="flex flex-col md:flex-row flex-wrap justify-between w-full p-2">
+          <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
             <div>Total duration</div>
             <div>3 day, 2 hours, 5 minutes</div>
           </div>
