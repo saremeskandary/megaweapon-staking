@@ -18,7 +18,7 @@ module.exports = {
       }),
       colors: {
         night: "#0f1f3a",
-        cardbg: { dark: "#000000b5", light: "#a5a6a694" },
+        cardbg: { dark: "#000000b5", light: "#e4e4e4d1" },
       },
       spacing: {
         128: "32rem",
