@@ -3,23 +3,44 @@ import Link from "next/link";
 import useEagerConnect from "../hooks/useEagerConnect";
 import Account from "./Account";
 import Image from "next/image";
+import { useState } from "react";
 
-function NavImage(props: { name: string; alt: string }) {
+function NavImage(props: { name: string }) {
+  const [selected, setSelected] = useState<boolean>(false);
+  const height = "40",
+    width = "150";
   return (
-    <div>
-      <Image
-        src={`/../public/assets/ELEMENTS/graphic/header/${props.name}.png`}
-        alt={props.alt}
-        width="120"
-        height="30"
-      />
-    </div>
-  );
-}
-function NavButton({ children }: any) {
-  return (
-    <div className="w-20 text-center border-x-2 border-b-4 px-4 rounded-bl-xl rounded-br-3xl bg-night border-gray-light text-gray-light -ml-1">
-      {children}
+    <div
+      className={`flex item-center text-center text-night ${
+        selected && "gray-100"
+      }`}
+      onMouseOver={() => setSelected(true)}
+      onMouseLeave={() => setSelected(false)}
+    >
+      <div className="absolute">
+        {selected ? (
+          <Image
+            src={`/../public/assets/btn-header-mode-default.png`}
+            alt={props.name}
+            width={width}
+            height={height}
+          />
+        ) : (
+          <Image
+            src={`/../public/assets/btn-header-mode-selected.png`}
+            alt={props.name}
+            width={width}
+            height={height}
+          />
+        )}
+      </div>
+      <div
+        className={`absolute px-6  ${
+          selected ? "text-night" : "text-gray-200"
+        }`}
+      >
+        {props.name}
+      </div>
     </div>
   );
 }
@@ -31,10 +52,10 @@ export default function Header({ children }: any) {
   return (
     <div>
       <header>
-        <div className="flex justify-center bg-header w-screen border-b-2">
-          <div className="flex justify-center self-center w-1/2">
-            <div className="w-full">
-              <div className="flex flex-row w-full justify-between items-center ">
+        <div className="flex justify-center bg-header w-screen border-b-2 border-black shadow-black shadow-md">
+          <div className="flex justify-center self-center sm:w-1/2 w-full">
+            <div className="w-full item-center">
+              <div className="flex flex-row  flex-wrap w-full items-center justify-center md:justify-between">
                 <div className="flex flex-row justify-between gap-1 p-1">
                   <Image
                     src="/../public/assets/ELEMENTS/graphic/header/gfx-mwstamp.png"
@@ -49,28 +70,30 @@ export default function Header({ children }: any) {
                     height="60"
                   />
                 </div>
-                <Account triedToEagerConnect={triedToEagerConnect} />
+                <div className="bg-sky-600 hover:bg-sky-700 px-1 rounded-xl">
+                  <Account triedToEagerConnect={triedToEagerConnect} />
+                </div>
               </div>
               <div className="text-center">Your ETH rewards: 3 ETH</div>
             </div>
           </div>
         </div>
 
-        <nav className="flex justify-center self-center ">
-          <div className="flex flex-row w-1/2">
+        <nav className="flex justify-center self-center">
+          <div className="flex flex-row sm:w-1/2 w-full order-1 bg-slate-500 gap-20">
             <Link href="/stake">
               <a>
-                <NavButton>stake</NavButton>
+                <NavImage name="stake" />
               </a>
             </Link>
             <Link href="/unstake">
               <a>
-                <NavButton>unstake</NavButton>
+                <NavImage name="unstake" />
               </a>
             </Link>
             <Link href="/claim">
               <a>
-                <NavButton>claim</NavButton>
+                <NavImage name="claim" />
               </a>
             </Link>
           </div>
