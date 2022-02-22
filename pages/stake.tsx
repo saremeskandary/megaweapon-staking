@@ -1,5 +1,4 @@
 import Layout from "../components/Layout";
-import Image from "next/image";
 import { Card } from "../components/Card";
 import { Button } from "../components/Button";
 
@@ -9,7 +8,7 @@ export default function stake() {
       <Button
         kind="light"
         content="stake $WEAPON"
-        lock="icon-addstake"
+        lock="icon-stake"
         onClick={() => {}}
       />
       <Button
@@ -20,8 +19,8 @@ export default function stake() {
       />
       <Button
         kind="light"
-        content="stake $WEAPON"
-        lock="icon-addstake"
+        content="extend stake"
+        lock="icon-extendstake"
         onClick={() => {}}
       />
 
