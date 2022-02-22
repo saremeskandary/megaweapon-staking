@@ -20,6 +20,10 @@ module.exports = {
         night: "#0f1f3a",
         cardbg: "#000000b5",
       },
+      spacing: {
+        128: "32rem",
+        144: "36rem",
+      },
     },
   },
   plugins: [],

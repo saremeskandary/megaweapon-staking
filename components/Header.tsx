@@ -11,13 +11,13 @@ function NavImage(props: { name: string }) {
     width = "150";
   return (
     <div
-      className={`flex item-center text-center text-night ${
+      className={`flex relative item-center text-center -mx-2 md:-mx-1 lg:mx-0  text-night ${
         selected && "gray-100"
       }`}
       onMouseOver={() => setSelected(true)}
       onMouseLeave={() => setSelected(false)}
     >
-      <div className="absolute">
+      <div className="">
         {selected ? (
           <Image
             src={`/../public/assets/btn-header-mode-default.png`}
@@ -53,7 +53,7 @@ export default function Header({ children }: any) {
     <div>
       <header>
         <div className="flex justify-center bg-header w-screen border-b-2 border-black shadow-black shadow-md">
-          <div className="flex justify-center self-center sm:w-1/2 w-full">
+          <div className="flex justify-center self-center sm:w-128 w-full">
             <div className="w-full item-center">
               <div className="flex flex-row  flex-wrap w-full items-center justify-center md:justify-between">
                 <div className="flex flex-row justify-between gap-1 p-1">
@@ -79,8 +79,8 @@ export default function Header({ children }: any) {
           </div>
         </div>
 
-        <nav className="flex justify-center self-center">
-          <div className="flex flex-row sm:w-1/2 w-full order-1 bg-slate-500 gap-20">
+        <nav className="flex justify-center self-center px-4">
+          <div className="flex flex-row sm:w-128 w-full">
             <Link href="/stake">
               <a>
                 <NavImage name="stake" />
