@@ -3,52 +3,83 @@ import Link from "next/link";
 import useEagerConnect from "../hooks/useEagerConnect";
 import Account from "./Account";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-function NavImage(props: { name: string }) {
-  const [selected, setSelected] = useState<boolean>(false);
-  const height = "40",
-    width = "150";
+interface INavImage {
+  name: string;
+  selected?: boolean;
+}
+
+function NavImage({ name, selected }: INavImage) {
+  const [hovered, setHovered] = useState<boolean>(false);
+  const dark = "default";
+  const light = "selected";
+  const [theme, setTheme] = useState<"default" | "selected">();
+  const height = "40";
+  const width = "150";
+
+  useEffect(() => {
+    switch (true) {
+      case selected || hovered:
+        setTheme(dark);
+        break;
+
+      default:
+        setTheme(light);
+        break;
+    }
+  }, [hovered, selected]);
+
   return (
     <div
       className={`flex relative item-center text-center -mx-2 md:-mx-1 lg:mx-0  text-night ${
         selected && "gray-100"
       }`}
-      onMouseOver={() => setSelected(true)}
-      onMouseLeave={() => setSelected(false)}
+      onMouseOver={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <div className="">
-        {selected ? (
-          <Image
-            src={`/../public/assets/btn-header-mode-selected.png`}
-            alt={props.name}
-            width={width}
-            height={height}
-          />
-        ) : (
-          <Image
-            src={`/../public/assets/btn-header-mode-default.png`}
-            alt={props.name}
-            width={width}
-            height={height}
-          />
-        )}
+        <Image
+          src={`/../public/assets/btn-header-mode-${theme}.png`}
+          alt={name}
+          width={width}
+          height={height}
+        />
       </div>
       <div
         className={`absolute px-6  ${
-          selected ? "text-gray-200" : "text-night"
+          theme === dark ? "text-night" : "text-gray-200"
         }`}
       >
-        {props.name}
+        {name}
       </div>
     </div>
   );
 }
 
 export default function Header({ children }: any) {
+  const router = useRouter();
   const { account, library } = useWeb3React();
   const triedToEagerConnect = useEagerConnect();
   const isConnected = typeof account === "string" && !!library;
+  const [active, setActive] = useState<"/stake" | "/unstake" | "/claim">();
+  useEffect(() => {
+    switch (router.pathname) {
+      case "/stake":
+        setActive("/stake");
+        break;
+      case "/unstake":
+        setActive("/unstake");
+        break;
+      case "/claim":
+        setActive("/claim");
+        break;
+      default:
+        console.log("No such path exists!");
+        break;
+    }
+  }, [account, router, active]);
   return (
     <div>
       <header>
@@ -83,17 +114,26 @@ export default function Header({ children }: any) {
           <div className="flex flex-row sm:w-128 w-full">
             <Link href="/stake">
               <a>
-                <NavImage name="stake" />
+                <NavImage
+                  name="stake"
+                  selected={active === "/stake" ? true : false}
+                />
               </a>
             </Link>
             <Link href="/unstake">
               <a>
-                <NavImage name="unstake" />
+                <NavImage
+                  name="unstake"
+                  selected={active === "/unstake" ? true : false}
+                />
               </a>
             </Link>
             <Link href="/claim">
               <a>
-                <NavImage name="claim" />
+                <NavImage
+                  name="claim"
+                  selected={active === "/claim" ? true : false}
+                />
               </a>
             </Link>
           </div>

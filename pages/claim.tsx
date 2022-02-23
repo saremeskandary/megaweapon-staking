@@ -18,7 +18,7 @@ export default function claim({}: Props) {
 
       <form action="" className="flex flex-col px-6 gap-2">
         <Card dark style={{ flexDirection: "column" }}>
-          <label htmlFor="password">
+          <label>
             ETH REWARD AVAILABLE:
           </label>
           <input type="number" id="number" required></input>
