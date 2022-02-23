@@ -16,9 +16,19 @@ export default function claim({}: Props) {
         />
       </div>
 
-      <Card dark>
-
-      </Card>
+      <form action="" className="flex flex-col px-6 gap-2">
+        <Card dark style={{ flexDirection: "column" }}>
+          <label htmlFor="password" className="">
+            ETH REWARD AVAILABLE:
+          </label>
+          <input type="password" id="password" className="" required></input>
+          <label htmlFor="password" className="">
+            AMOUNT TO CLAIM:
+          </label>
+          <input type="password" id="password" className="" required></input>
+        </Card>
+        <Button full kind="dark" content="claim ETH" onClick={() => {}} />
+      </form>
     </Layout>
   );
 }

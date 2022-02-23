@@ -19,7 +19,7 @@ export default function stake() {
 
         <Button
           full
-          kind="dark"
+          kind="light"
           content="Stake"
           lock="icon-stake"
           onClick={() => {}}
@@ -37,7 +37,7 @@ export default function stake() {
         </div>
         <Button
           full
-          kind="dark"
+          kind="light"
           content="Set staking period"
           lock="icon-stake"
           onClick={() => {}}
