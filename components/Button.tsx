@@ -6,10 +6,8 @@ interface IButton {
   kind: "dark" | "light";
   lock?:
     | "icon-addstake"
-    | "icon-addstake"
     | "icon-extendstake"
-    | "icon-extendstake"
-    | "icon-extendstake"
+    | "icon-claim"
     | "icon-stake";
   content: string;
   full?: boolean;
