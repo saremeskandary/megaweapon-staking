@@ -12,10 +12,16 @@ interface IButton {
     | "icon-extendstake"
     | "icon-stake";
   content: string;
-  w?: string;
+  full?: boolean;
 }
 
-export function Button({ onClick, kind = "light", lock, content, w }: IButton) {
+export function Button({
+  onClick,
+  kind = "light",
+  lock,
+  content,
+  full,
+}: IButton) {
   const light = "bg-cardbg-light text-gray-900  border-gray-900";
   const dark = "bg-cardbg-dark text-gray-100  border-gray-100";
   const [selected, setSelected] = useState<boolean>(false);
@@ -59,11 +65,11 @@ export function Button({ onClick, kind = "light", lock, content, w }: IButton) {
       onMouseOver={() => setSelected(true)}
       onMouseLeave={() => setSelected(false)}
       onClick={onClick}
-      className={`flex flex-row flex-wrap ${
-        w && "w-44"
+      className={`flex flex-1 flex-row h-max  ${
+        full ? "w-full" : "w-44"
       } justify-between border-2  hover:opacity-100 ${style}`}
     >
-      <div className="px-2 py-1">{content}</div>
+      <div className="flex-1 px-2 py-1 text-center w-max">{content}</div>
       {lock && (
         <div className={`flex px-2 py-1 border-l-2 ${middleBorder} `}>
           <Image

@@ -1,28 +1,51 @@
 import Layout from "../components/Layout";
 import { Card } from "../components/Card";
 import { Button } from "../components/Button";
+import Image from "next/image";
 
 export default function stake() {
   return (
     <Layout>
-      <Button
-        kind="light"
-        content="stake $WEAPON"
-        lock="icon-stake"
-        onClick={() => {}}
-      />
-      <Button
-        kind="light"
-        content="add to stake"
-        lock="icon-addstake"
-        onClick={() => {}}
-      />
-      <Button
-        kind="light"
-        content="extend stake"
-        lock="icon-extendstake"
-        onClick={() => {}}
-      />
+
+
+      <Card>
+        <div className="flex-1">
+          <input
+            type="number"
+            id="stake"
+            className=" text-center text-sm block w-full h-full border-2 border-black dark:bg-white"
+            placeholder="stake amount"
+            required
+          />
+        </div>
+
+        <Button
+          full
+          kind="dark"
+          content="Stake"
+          lock="icon-stake"
+          onClick={() => {}}
+        />
+      </Card>
+
+      <Card>
+        <div className="flex-1">
+          <input
+            type="date"
+            id="stake"
+            className=" text-center text-sm block w-full h-full border-2 border-black dark:bg-white"
+
+            required
+          />
+        </div>
+        <Button
+          full
+          kind="dark"
+          content="Set staking period"
+          lock="icon-stake"
+          onClick={() => {}}
+        />
+      </Card>
 
       <Card>
         <div className="flex flex-col w-full justify-center items-center md:items-stretch">
