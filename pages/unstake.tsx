@@ -16,9 +16,10 @@ export default function unstake({}: Props) {
         />
       </div>
 
-      <form action="" className="flex flex-col max-w-sm w-60 px-6 gap-2">
+      <form action="" className="flex flex-col  px-6 gap-2">
         <Card dark>
-          HOW MUCH WEAPON are you unstaking?
+          HOW MUCH WEAPON <br />
+          are you unstaking?
         </Card>
 
         <Card dark style={{ flexDirection: "column" }}>
