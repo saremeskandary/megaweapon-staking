@@ -18,14 +18,14 @@ export default function claim({}: Props) {
 
       <form action="" className="flex flex-col px-6 gap-2">
         <Card dark style={{ flexDirection: "column" }}>
-          <label htmlFor="password" className="">
+          <label htmlFor="password">
             ETH REWARD AVAILABLE:
           </label>
-          <input type="number" id="number" className="" required></input>
-          <label htmlFor="password" className="">
+          <input type="number" id="number" required></input>
+          <label htmlFor="ETH amount">
             AMOUNT TO CLAIM:
           </label>
-          <input type="number" id="number" className="" required></input>
+          <input type="number" id="number" required></input>
         </Card>
         <Button full kind="dark" content="[ CONFIRM ]" onClick={() => {}} />
       </form>
