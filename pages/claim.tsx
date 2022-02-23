@@ -21,11 +21,11 @@ export default function claim({}: Props) {
           <label htmlFor="password" className="">
             ETH REWARD AVAILABLE:
           </label>
-          <input type="password" id="password" className="" required></input>
+          <input type="number" id="number" className="" required></input>
           <label htmlFor="password" className="">
             AMOUNT TO CLAIM:
           </label>
-          <input type="password" id="password" className="" required></input>
+          <input type="number" id="number" className="" required></input>
         </Card>
         <Button full kind="dark" content="[ CONFIRM ]" onClick={() => {}} />
       </form>
