@@ -6,8 +6,6 @@ import Image from "next/image";
 export default function stake() {
   return (
     <Layout>
-
-
       <Card>
         <div className="flex-1">
           <input
@@ -34,7 +32,6 @@ export default function stake() {
             type="date"
             id="stake"
             className=" text-center text-sm block w-full h-full border-2 border-black dark:bg-white"
-
             required
           />
         </div>
