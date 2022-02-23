@@ -70,7 +70,7 @@ export default function Header({ children }: any) {
                     height="60"
                   />
                 </div>
-                <div className="bg-sky-400 hover:bg-sky-700 text-white px-1 py-1 rounded-3xl">
+                <div className="bg-blue-500 hover:bg-sky-700 text-white px-1 py-1 rounded-3xl">
                   <Account triedToEagerConnect={triedToEagerConnect} />
                 </div>
               </div>
