@@ -12,9 +12,10 @@ interface IButton {
     | "icon-extendstake"
     | "icon-stake";
   content: string;
+  w?: string;
 }
 
-export function Button({ onClick, kind = "light", lock, content }: IButton) {
+export function Button({ onClick, kind = "light", lock, content, w }: IButton) {
   const light = "bg-cardbg-light text-gray-900  border-gray-900";
   const dark = "bg-cardbg-dark text-gray-100  border-gray-100";
   const [selected, setSelected] = useState<boolean>(false);
@@ -29,15 +30,14 @@ export function Button({ onClick, kind = "light", lock, content }: IButton) {
       case kind === "dark" && selected === false:
         setLockTheme("default");
         setStyle(light);
-
         setMiddleBorder(mdark);
         break;
-      case kind === "light" && selected === false:
+      case kind === "dark" && selected === true:
         setLockTheme("selected");
         setStyle(dark);
         setMiddleBorder(mlight);
         break;
-      case kind === "dark" && selected === false:
+      case kind === "light" && selected === false:
         setLockTheme("selected");
         setStyle(dark);
         setMiddleBorder(mlight);
@@ -59,7 +59,9 @@ export function Button({ onClick, kind = "light", lock, content }: IButton) {
       onMouseOver={() => setSelected(true)}
       onMouseLeave={() => setSelected(false)}
       onClick={onClick}
-      className={`flex flex-row flex-wrap w-44 justify-between border-2  hover:opacity-100 ${style}`}
+      className={`flex flex-row flex-wrap ${
+        w && "w-44"
+      } justify-between border-2  hover:opacity-100 ${style}`}
     >
       <div className="px-2 py-1">{content}</div>
       {lock && (
