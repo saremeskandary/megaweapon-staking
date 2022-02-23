@@ -22,11 +22,11 @@ function NavImage({ name, selected }: INavImage) {
   useEffect(() => {
     switch (true) {
       case selected || hovered:
-        setTheme(dark);
+        setTheme(light);
         break;
 
       default:
-        setTheme(light);
+        setTheme(dark);
         break;
     }
   }, [hovered, selected]);
