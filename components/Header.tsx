@@ -11,7 +11,7 @@ function NavImage(props: { name: string }) {
     width = "150";
   return (
     <div
-      className={`flex relative item-center text-center -mx-2 md:-mx-1 lg:mx-0  text-night bg- ${
+      className={`flex relative item-center text-center -mx-2 md:-mx-1 lg:mx-0  text-night ${
         selected && "gray-100"
       }`}
       onMouseOver={() => setSelected(true)}
@@ -20,14 +20,14 @@ function NavImage(props: { name: string }) {
       <div className="">
         {selected ? (
           <Image
-            src={`/../public/assets/btn-header-mode-default.png`}
+            src={`/../public/assets/btn-header-mode-selected.png`}
             alt={props.name}
             width={width}
             height={height}
           />
         ) : (
           <Image
-            src={`/../public/assets/btn-header-mode-selected.png`}
+            src={`/../public/assets/btn-header-mode-default.png`}
             alt={props.name}
             width={width}
             height={height}
@@ -36,7 +36,7 @@ function NavImage(props: { name: string }) {
       </div>
       <div
         className={`absolute px-6  ${
-          selected ? "text-night" : "text-gray-200"
+          selected ? "text-gray-200" : "text-night"
         }`}
       >
         {props.name}
@@ -70,7 +70,7 @@ export default function Header({ children }: any) {
                     height="60"
                   />
                 </div>
-                <div className="bg-sky-600 hover:bg-sky-700 px-1 rounded-xl">
+                <div className="bg-sky-400 hover:bg-sky-700 text-white px-1 py-1 rounded-3xl">
                   <Account triedToEagerConnect={triedToEagerConnect} />
                 </div>
               </div>
