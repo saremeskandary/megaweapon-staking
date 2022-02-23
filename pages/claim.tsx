@@ -27,7 +27,7 @@ export default function claim({}: Props) {
           </label>
           <input type="password" id="password" className="" required></input>
         </Card>
-        <Button full kind="dark" content="claim ETH" onClick={() => {}} />
+        <Button full kind="dark" content="[ CONFIRM ]" onClick={() => {}} />
       </form>
     </Layout>
   );
