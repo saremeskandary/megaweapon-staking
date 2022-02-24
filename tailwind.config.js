@@ -4,17 +4,21 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    // fontFamily: {
-    //   sans: ["Graphik", "sans-serif"], //TODO add font
-    //   serif: ["Merriweather", "serif"],
-    // },
     extend: {
+      fontFamily: {
+        consola: ["consola"],
+        consolab: ["consolab"],
+        consolai: ["consolai"],
+        consolaz: ["consolaz"],
+        Shizuru: ["Shizuru"],
+        Redressed: ["Redressed"],
+        sans: ["consola", "sans-serif"],
+      },
       backgroundImage: (theme) => ({
-        header:
-          "url('../public/assets/ELEMENTS-PC/bkgnd-header-stroke-PC.png')",
-        main: "url('../public/assets/ELEMENTS-PC/bkgnd-main-PC.png')",
-        navSelected: "url('../public/assets/btn-header-mode-selected.png')",
-        navDefault: "url('../public/assets/btn-header-mode-default.png')",
+        header: "url('/assets/ELEMENTS-PC/bkgnd-header-stroke-PC.png')",
+        main: "url('/assets/ELEMENTS-PC/bkgnd-main-PC.png')",
+        navSelected: "url('/assets/btn-header-mode-selected.png')",
+        navDefault: "url('/assets/btn-header-mode-default.png')",
       }),
       colors: {
         night: "#0f1f3a",
@@ -26,5 +30,16 @@ module.exports = {
       },
     },
   },
+
+  variants: {
+    extend: {
+      fontFamily: ["hover", "focus"],
+    },
+  },
+
   plugins: [],
+
+  corePlugins: {
+    fontFamily: true,
+  },
 };

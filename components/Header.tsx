@@ -41,7 +41,7 @@ function NavImage({ name, selected }: INavImage) {
     >
       <div className="">
         <Image
-          src={`/../public/assets/btn-header-mode-${theme}.png`}
+          src={`/assets/btn-header-mode-${theme}.png`}
           alt={name}
           width={width}
           height={height}
@@ -89,13 +89,13 @@ export default function Header({ children }: any) {
               <div className="flex flex-row  flex-wrap w-full items-center justify-center md:justify-between">
                 <div className="flex flex-row justify-between gap-1 p-1">
                   <Image
-                    src="/../public/assets/ELEMENTS/graphic/header/gfx-mwstamp.png"
+                    src="/assets/ELEMENTS/graphic/header/gfx-mwstamp.png"
                     alt="gfx-mwstamp"
                     width="150"
                     height="60"
                   />
                   <Image
-                    src="/../public/assets/ELEMENTS/graphic/header/gfx-rocketmanbomb.png"
+                    src="/assets/ELEMENTS/graphic/header/gfx-rocketmanbomb.png"
                     alt="gfx-rocketmanbomb"
                     width="230"
                     height="60"
@@ -105,7 +105,9 @@ export default function Header({ children }: any) {
                   <Account triedToEagerConnect={triedToEagerConnect} />
                 </div>
               </div>
-              <div className="text-center">Your ETH rewards: 3 ETH</div>
+              <div className="text-center font-consolab">
+                Your ETH rewards: 3 ETH
+              </div>
             </div>
           </div>
         </div>
