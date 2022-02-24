@@ -27,7 +27,7 @@ export function NavImage({ name, selected }: INavImage) {
 
   return (
     <div
-      className={`flex self-end relative justify-center item-center text-center -mx-2 md:-mx-1 lg:mx-0  text-night ${selected && "gray-100"}`}
+      className={`flex self-end relative justify-center item-center -mx-2 md:-mx-1 lg:mx-0  text-night ${selected && "gray-100"} bg-red-500`}
       onMouseOver={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -39,7 +39,7 @@ export function NavImage({ name, selected }: INavImage) {
           height={height} />
       </div>
       <div
-        className={`absolute px-6  ${theme === dark ? "text-night" : "text-gray-200"}  `}
+        className={`absolute px-6 mt-1  ${theme === dark ? "text-night" : "text-gray-200"}`}
       >
         {name}
       </div>

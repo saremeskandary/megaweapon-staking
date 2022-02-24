@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Layout({ children }: any) {
   return (
-    <div className="bg-main w-screen h-screen bg-no-repeat bg-cover bg-center bg-fixed overflow-x-hidden font-consola">
+    <div className="bg-main w-screen h-screen bg-no-repeat bg-cover bg-center bg-fixed overflow-x-hidden font-consola text-xl">
       <link rel="preload" href="/fonts/consola.ttf" as="font" crossOrigin="" />
       <link rel="preload" href="/fonts/consolab.ttf" as="font" crossOrigin="" />
       <link rel="preload" href="/fonts/consolai.ttf" as="font" crossOrigin="" />
