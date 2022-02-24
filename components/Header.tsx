@@ -117,7 +117,7 @@ export default function Header({ children }: any) {
             <Link href="/stake">
               <a>
                 <NavImage
-                  name="stake"
+                  name="STAKE"
                   selected={active === "/stake" ? true : false}
                 />
               </a>
@@ -125,7 +125,7 @@ export default function Header({ children }: any) {
             <Link href="/unstake">
               <a>
                 <NavImage
-                  name="unstake"
+                  name="UNSTAKE"
                   selected={active === "/unstake" ? true : false}
                 />
               </a>
@@ -133,7 +133,7 @@ export default function Header({ children }: any) {
             <Link href="/claim">
               <a>
                 <NavImage
-                  name="claim"
+                  name="CLAIM"
                   selected={active === "/claim" ? true : false}
                 />
               </a>
