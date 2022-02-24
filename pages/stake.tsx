@@ -11,7 +11,7 @@ export default function stake() {
           <input
             type="number"
             id="stake"
-            className=" text-center p-1 block w-full h-full border-2 border-black dark:bg-white"
+            className=" text-center p-1 block w-full h-10 border-2 border-black dark:bg-white"
             placeholder="stake amount"
             required
           />
@@ -31,7 +31,7 @@ export default function stake() {
           <input
             type="date"
             id="stake"
-            className="text-center p-1 block w-full h-full border-2 border-black dark:bg-white"
+            className="text-center p-1 block w-full h-10 border-2 border-black dark:bg-white"
             required
           />
         </div>
