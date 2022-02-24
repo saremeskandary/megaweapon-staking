@@ -58,11 +58,13 @@ export function Button({
       {...props}
       onMouseOver={() => setSelected(true)}
       onMouseLeave={() => setSelected(false)}
-      className={`flex flex-1 flex-row h-max  ${
-        full ? "w-full" : "w-44"
+      className={`flex flex-1 flex-row h-10  ${
+        full ? "w-full" : "w-max"
       } justify-between border-2  hover:opacity-100 ${style}`}
     >
-      <div className="flex-1 self-center text-center w-max text-base">{content}</div>
+      <div className="flex-1 self-center text-center w-max text-lg p-2">
+        {content}
+      </div>
       {lock && (
         <div
           className={`flex h-max self-center p-1 -700 border-l-2 ${middleBorder}`}

@@ -33,7 +33,7 @@ export default function Header({ children }: any) {
     <div>
       <header>
         <div className="flex justify-center bg-header w-screen border-b-2 border-black shadow-black shadow-md">
-          <div className="flex justify-center self-center sm:w-128 w-full">
+          <div className="flex justify-center self-center sm:w-144 w-full">
             <div className="w-full item-center">
               <div className="flex flex-row  flex-wrap w-full items-center justify-center md:justify-between">
                 <div className="flex flex-row justify-between gap-1 p-1">
@@ -54,7 +54,7 @@ export default function Header({ children }: any) {
                   <Account triedToEagerConnect={triedToEagerConnect} />
                 </div>
               </div>
-              <div className="text-center font-consolab text-xl">
+              <div className="text-center font-consolab text-3xl">
                 Your ETH rewards: 3 ETH
               </div>
             </div>
@@ -62,7 +62,7 @@ export default function Header({ children }: any) {
         </div>
 
         <nav className="flex justify-center self-center">
-          <div className="flex flex-row-reverse pr-6 md:pr-40 lg:pr-48 ">
+          <div className="flex flex-row-reverse pr-0 md:pr-40 lg:pr-44 ">
             <Link href="/claim">
               <a>
                 <NavImage

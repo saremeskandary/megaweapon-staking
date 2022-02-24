@@ -11,7 +11,7 @@ export default function stake() {
           <input
             type="number"
             id="stake"
-            className=" text-center text-sm block w-full h-full border-2 border-black dark:bg-white"
+            className=" text-center p-1 block w-full h-full border-2 border-black dark:bg-white"
             placeholder="stake amount"
             required
           />
@@ -27,11 +27,11 @@ export default function stake() {
       </Card>
 
       <Card>
-        <div className="flex-1">
+        <div className="flex-1 h-full">
           <input
             type="date"
             id="stake"
-            className=" text-center text-sm block w-full h-full border-2 border-black dark:bg-white"
+            className="text-center p-1 block w-full h-full border-2 border-black dark:bg-white"
             required
           />
         </div>
@@ -47,11 +47,11 @@ export default function stake() {
       <Card>
         <div className="flex flex-col w-full justify-center items-center md:items-stretch">
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
-            <div className="text-base">Your balance</div>
+            <div className="text-lg">Your balance</div>
             <div>3 $WEPON</div>
           </div>
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
-            <div className="text-base">Total duration</div>
+            <div className="text-lg">Total duration</div>
             <div>3 day, 2 hours, 5 minutes</div>
           </div>
         </div>
