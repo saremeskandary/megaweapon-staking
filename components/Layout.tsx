@@ -16,7 +16,7 @@ export default function Layout({ children }: any) {
         </div>
       </div>
 
-      <div className="flex flex-row-reverse m-2">
+      <div className="flex flex-row-reverse md:justify-center m-2">
         <Image
           src={`/assets/ELEMENTS/graphic/gfx-cautionlabel.png`}
           alt="lock"
