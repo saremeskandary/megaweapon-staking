@@ -105,7 +105,7 @@ export default function Header({ children }: any) {
                   <Account triedToEagerConnect={triedToEagerConnect} />
                 </div>
               </div>
-              <div className="text-center font-consolab">
+              <div className="text-center font-consolab text-xl">
                 Your ETH rewards: 3 ETH
               </div>
             </div>

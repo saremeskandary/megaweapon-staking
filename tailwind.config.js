@@ -9,10 +9,7 @@ module.exports = {
         consola: ["consola"],
         consolab: ["consolab"],
         consolai: ["consolai"],
-        consolaz: ["consolaz"],
-        Shizuru: ["Shizuru"],
-        Redressed: ["Redressed"],
-        sans: ["consola", "sans-serif"],
+        consolaz: ["consolaz"]
       },
       backgroundImage: (theme) => ({
         header: "url('/assets/ELEMENTS-PC/bkgnd-header-stroke-PC.png')",
@@ -30,16 +27,5 @@ module.exports = {
       },
     },
   },
-
-  variants: {
-    extend: {
-      fontFamily: ["hover", "focus"],
-    },
-  },
-
   plugins: [],
-
-  corePlugins: {
-    fontFamily: true,
-  },
 };
