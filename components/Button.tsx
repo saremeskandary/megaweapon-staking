@@ -62,7 +62,7 @@ export function Button({
         full ? "w-full" : "w-44"
       } justify-between border-2  hover:opacity-100 ${style}`}
     >
-      <div className="flex-1 self-center text-center w-max">{content}</div>
+      <div className="flex-1 self-center text-center w-max text-base">{content}</div>
       {lock && (
         <div
           className={`flex h-max self-center p-1 -700 border-l-2 ${middleBorder}`}

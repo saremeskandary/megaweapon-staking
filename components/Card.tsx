@@ -6,7 +6,7 @@ export function Card({ children, dark, ...props }: ICard) {
   return (
     <div
       {...props}
-      className={`flex flex-row flex-wrap md:flex-nowrap gap-3 w-full justify-between border-2  hover:opacity-100 px-3 py-5 ${
+      className={`flex flex-row flex-wrap md:flex-nowrap gap-3 w-full justify-between border-2  hover:opacity-100 px-3 py-5 text-sm ${
         dark
           ? "bg-cardbg-dark text-gray-100  border-gray-100"
           : "bg-cardbg-light text-gray-900  border-gray-900"
