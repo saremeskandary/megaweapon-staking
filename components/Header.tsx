@@ -61,13 +61,13 @@ export default function Header({ children }: any) {
           </div>
         </div>
 
-        <nav className="flex justify-center self-center px-4">
-          <div className="flex flex-row-reverse sm:w-128 w-full">
-            <Link href="/stake">
+        <nav className="flex justify-center self-center">
+          <div className="flex flex-row-reverse pr-6 md:pr-40 lg:pr-48 ">
+            <Link href="/claim">
               <a>
                 <NavImage
-                  name="STAKE"
-                  selected={active === "/stake" ? true : false}
+                  name="CLAIM"
+                  selected={active === "/claim" ? true : false}
                 />
               </a>
             </Link>
@@ -79,11 +79,11 @@ export default function Header({ children }: any) {
                 />
               </a>
             </Link>
-            <Link href="/claim">
+            <Link href="/stake">
               <a>
                 <NavImage
-                  name="CLAIM"
-                  selected={active === "/claim" ? true : false}
+                  name="STAKE"
+                  selected={active === "/stake" ? true : false}
                 />
               </a>
             </Link>
