@@ -7,6 +7,7 @@ export default function Layout({ children }: any) {
       <link rel="preload" href="/fonts/consolab.ttf" as="font" crossOrigin="" />
       <link rel="preload" href="/fonts/consolai.ttf" as="font" crossOrigin="" />
       <link rel="preload" href="/fonts/consolaz.ttf" as="font" crossOrigin="" />
+
       <div className="flex flex-col items-center justify-center">
         <Header />
         <div className="flex flex-col sm:w-128 w-full mt-14 gap-2 items-center justify-center px-2 pb-4">
