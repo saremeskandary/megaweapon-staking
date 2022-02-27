@@ -9,7 +9,7 @@ module.exports = {
         consola: ["consola"],
         consolab: ["consolab"],
         consolai: ["consolai"],
-        consolaz: ["consolaz"]
+        consolaz: ["consolaz"],
       },
       backgroundImage: (theme) => ({
         header: "url('/assets/ELEMENTS-PC/bkgnd-header-stroke-PC.png')",
@@ -19,6 +19,7 @@ module.exports = {
       }),
       colors: {
         night: "#0f1f3a",
+        alarm: "#f46019a3",
         cardbg: { dark: "#000000b5", light: "#e4e4e4d1" },
       },
       spacing: {
