@@ -64,10 +64,10 @@ export default function claim({}: Props) {
           onClick={handleSelectAll}
         />
       </div>
-      
+
       <Button
         kind="dark"
-        content="Claim all eligible"
+        content="select all claimable weeks"
         lock="icon-claim"
         onClick={handleSelectAll}
       />
@@ -85,6 +85,9 @@ export default function claim({}: Props) {
             />
           ))}
         </Card>
+        <div className="mb-2">
+          <Button kind="light" content="Show more weeks" onClick={() => {}} />
+        </div>
         <Button full kind="dark" content="[ CONFIRM ]" onClick={() => {}} />
       </form>
     </Layout>
