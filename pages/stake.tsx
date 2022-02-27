@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-function Caution({ onCancle }) {
+function Caution({ onCancel }) {
   return (
     <div className="flex flex-col p-2 gap-2 w-80 border-2 rounded-md border-red-800 bg-alarm">
       <h2 className="text-xl self-center font-consolab px-2 rounded-md bg-cardbg-light text-red-600 ">
@@ -16,13 +16,15 @@ function Caution({ onCancle }) {
       </p>
       <div className="flex flex-row self-end gap-2 ">
         <button
-          onClick={onCancle}
-          className="hover:border-b-4 text-base border-red-600"
+          onClick={onCancel}
+          className="border-b-4 text-base border-transparent hover:border-red-600 "
         >
           Close
         </button>
         <Link href="/claim">
-          <a className="hover:border-b-4 text-lg border-green-800">Claim</a>
+          <a className="border-b-4 text-lg border-transparent hover:border-green-800">
+            Claim
+          </a>
         </Link>
       </div>
     </div>
@@ -35,7 +37,7 @@ export default function stake() {
     <Layout>
       {!caution && (
         <Caution
-          onCancle={() => {
+          onCancel={() => {
             setCaution(true);
           }}
         />
