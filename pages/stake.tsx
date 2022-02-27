@@ -14,6 +14,7 @@ function Caution({ onCancel }) {
       <p className="text-lg font-consolaz rounded-md bg-cardbg-light p-2">
         You're about to lose money. Claim your ETH rewards before you unstake.
       </p>
+<<<<<<< HEAD
       <div className="flex flex-row self-end gap-2 ">
         <button
           onClick={onCancel}
@@ -25,6 +26,14 @@ function Caution({ onCancel }) {
           <a className="border-b-4 text-lg border-transparent hover:border-green-800">
             Claim
           </a>
+=======
+      <div className="flex flex-row self-end gap-2 text-base">
+        <button onClick={onCancle} className="hover:border-b-4  border-red-600">
+          Close
+        </button>
+        <Link href="/claim">
+          <a className="hover:border-b-4 border-green-800">Claim</a>
+>>>>>>> 45ec1bc606f284f1f6b514965aadf866602be03d
         </Link>
       </div>
     </div>
