@@ -14,15 +14,12 @@ function Caution({ onCancle }) {
       <p className="text-lg font-consolaz rounded-md bg-cardbg-light p-2">
         You're about to lose money. Claim your ETH rewards before you unstake.
       </p>
-      <div className="flex flex-row self-end gap-2 ">
-        <button
-          onClick={onCancle}
-          className="hover:border-b-4 text-base border-red-600"
-        >
+      <div className="flex flex-row self-end gap-2 text-base">
+        <button onClick={onCancle} className="hover:border-b-4  border-red-600">
           Close
         </button>
         <Link href="/claim">
-          <a className="hover:border-b-4 text-lg border-green-800">Claim</a>
+          <a className="hover:border-b-4 border-green-800">Claim</a>
         </Link>
       </div>
     </div>
