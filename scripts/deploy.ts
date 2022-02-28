@@ -15,15 +15,19 @@ async function main() {
 
   // We get the contract to deploy
 
-  const Mw2 = await ethers.getContractFactory("mw2");
-  const mw2 = await Mw2.deploy("Hello, Hardhat!");
-  await mw2.deployed();
-  console.log("mw2 deployed to:", mw2.address);
+  const multiSig = "0x0"; //FIXME
+  const vault = "0x0"; //FIXME
+  const epochRobot = "0x0"; //FIXME
 
-  const Mw2_staking = await ethers.getContractFactory("mw2_staking");
-  const mw2_staking = await Mw2_staking.deploy("Hello, Hardhat!");
-  await mw2_staking.deployed();
-  console.log("mw2_staking deployed to:", mw2_staking.address);
+  const WEAPON = await ethers.getContractFactory("WEAPON");
+  const weapon = await WEAPON.deploy(vault, multiSig); //FIXME what is vault and myltysig adresses
+  await weapon.deployed();
+  console.log("mw2 deployed to:", weapon.address);
+
+  const MWStaking = await ethers.getContractFactory("MWStaking");
+  const mwStaking = await MWStaking.deploy(weapon.address, multiSig, epochRobot); //FIXME what is epochRobot
+  await mwStaking.deployed();
+  console.log("mwStaking deployed to:", mwStaking.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
