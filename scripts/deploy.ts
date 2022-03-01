@@ -17,12 +17,12 @@ async function main() {
 
   // We get the contract to deploy
 
-  const multiSig = process.env.PRIVATE_KEY as string; // Account #0  Private Key: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
-  const vault = process.env.PRIVATE_KEY as string; //FIXME
-  const epochRobot = process.env.PRIVATE_KEY as string; //FIXME
+  const multiSig = process.env.PRIVATE_KEY as string; // Account #0
+  const vault = process.env.PRIVATE_KEY as string; 
+  const epochRobot = process.env.PRIVATE_KEY as string; 
 
   const WEAPON = await ethers.getContractFactory("WEAPON");
-  const weapon = await WEAPON.deploy(vault, multiSig); //FIXME what is vault and myltysig adresses
+  const weapon = await WEAPON.deploy(vault, multiSig);
   await weapon.deployed();
   console.log("mw2 deployed to:", weapon.address);
 
@@ -31,7 +31,7 @@ async function main() {
     weapon.address,
     multiSig,
     epochRobot
-  ); //FIXME what is epochRobot
+  );
   await mwStaking.deployed();
   console.log("mwStaking deployed to:", mwStaking.address);
 

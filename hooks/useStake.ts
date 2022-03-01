@@ -3,26 +3,38 @@ import type { MWStaking } from "../typechain/MWStaking";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
 import useTokenContract from "./useTokenContract";
 import useMW2StakingContract from "./useMW2StakingContract";
+import { BigNumberish } from "ethers";
 
-function getTokenBalance(contract: MWStaking) {
-  return async (_: string, address: string) => {
-    const balance = await contract.stake();
+function stake(contract: MWStaking) {
+  return async (
+    account: string,
+    amount: BigNumberish,
+    unstakeTime: BigNumberish,
+    adjustedStake: BigNumberish
+  ) => {
+    const stake = await contract.stake(
+      account,
+      amount,
+      unstakeTime,
+      adjustedStake
+    );
 
-    return balance;
+    return stake;
   };
 }
 
 export default function useStake(
   account: string,
-  amount: string,
-  unstakeTime: string,
-  adjustedStake: string
+  amount: BigNumberish,
+  unstakeTime: BigNumberish,
+  adjustedStake: BigNumberish,
+  MWStakingAddress: string
 ) {
   const contract = useMW2StakingContract();
 
   const shouldFetch =
     typeof address === "string" &&
-    typeof tokenAddress === "string" &&
+    typeof MWStakingAddress === "string" &&
     !!contract;
 
   const result = useSWR(
