@@ -18,7 +18,7 @@ export default function unstake({}: Props) {
 
       <form action="" className="flex flex-col  px-6 gap-4">
         <Card dark>
-          HOW MUCH WEAPON
+          HOW MUCH $WEAPON
           are you unstaking?
         </Card>
 

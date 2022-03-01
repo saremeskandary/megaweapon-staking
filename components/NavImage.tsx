@@ -42,7 +42,7 @@ export function NavImage({ name, selected }: INavImage) {
         />
       </div>
       <div
-        className={`absolute px-6 mt-1  ${
+        className={`absolute pr-3 mt-1  ${
           theme === dark ? "text-night" : "text-gray-200"
         }`}
       >
