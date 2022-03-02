@@ -11,7 +11,8 @@ type TokenBalanceProps = {
 const TokenBalance = ({ tokenAddress, symbol }: TokenBalanceProps) => {
   const { account } = useWeb3React<Web3Provider>();
   const { data } = useTokenBalance(account, tokenAddress);
-
+  console.log();
+  
   return (
     <p>
       {parseBalance(data ?? 0)} {`${symbol}`}

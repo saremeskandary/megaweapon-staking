@@ -1,51 +1,25 @@
 import Layout from "../components/Layout";
 import { Card } from "../components/Card";
 import { Button } from "../components/Button";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { Web3Provider } from "@ethersproject/providers";
-import { useWeb3React } from "@web3-react/core";
-import { ethers } from "ethers";
-import { abi as MWStaking_ABI } from "../artifacts/contracts/mw2_staking.sol/MWStaking.json";
-import type { MWStaking } from "../typechain/MWStaking";
 import { weaponAddress } from "../config";
 import TokenBalance from "../components/TokenBalance";
-
-const MWStakingAdress = "";
-
-function Caution({ onCancel }) {
-  return (
-    <div className="flex flex-col p-2 gap-2 w-80 border-2 rounded-md border-red-800 bg-alarm">
-      <div>
-
-      </div>
-      
-      <h2 className="text-xl self-center font-consolab px-2 rounded-md bg-cardbg-light text-red-600 ">
-        Caution!
-      </h2>
-      <p className="text-lg font-consolaz rounded-md bg-cardbg-light p-2">
-        You're about to lose money. Claim your ETH rewards before you unstake.
-      </p>
-      <div className="flex flex-row self-end gap-2 ">
-        <button
-          onClick={onCancel}
-          className="border-b-4 text-base border-transparent hover:border-red-600 "
-        >
-          Close
-        </button>
-        <Link href="/claim">
-          <a className="border-b-4 text-lg border-transparent hover:border-green-800">
-            Claim
-          </a>
-        </Link>
-      </div>
-    </div>
-  );
-}
+import { Caution } from "../components/Caution";
+import type { Web3Provider } from "@ethersproject/providers";
+import { useWeb3React } from "@web3-react/core";
+import useWeaponContract from "../hooks/useWeaponContract";
+import useMW2StakingContract from "../hooks/useMW2StakingContract";
+import { parseBalance } from "../util";
+import useWeaponBalance from "../hooks/useWeaponBalance";
+import { formatEther } from "@ethersproject/units";
 
 export default function stake() {
   const [caution, setCaution] = useState<boolean>(false);
+
+  useEffect(() => {
+
+  }, []);
+
   return (
     <Layout>
       {caution && (
