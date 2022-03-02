@@ -16,10 +16,11 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-
-  const multiSig = process.env.PRIVATE_KEY as string; // Account #0
-  const vault = process.env.PRIVATE_KEY as string; 
-  const epochRobot = process.env.PRIVATE_KEY as string; 
+  const {} = await hre.ethers.getSigners();
+  
+  const multiSig = "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"; // Account #0
+  const vault = "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266";
+  const epochRobot = "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266";
 
   const WEAPON = await ethers.getContractFactory("WEAPON");
   const weapon = await WEAPON.deploy(vault, multiSig);
@@ -37,7 +38,7 @@ async function main() {
 
   fs.writeFileSync(
     "./config.ts",
-  `export const weaponAddress = "${weapon.address}"\nexport const mwStakingAddress = "${mwStaking.address}"`
+    `export const weaponAddress = "${weapon.address}"\nexport const mwStakingAddress = "${mwStaking.address}"`
   );
 }
 
