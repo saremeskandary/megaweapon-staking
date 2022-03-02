@@ -1,9 +1,9 @@
-import useMW2StakingContract from "./useMW2StakingContract";
+import { BigNumberish } from "ethers";
+import { MWStaking } from "../typechain/MWStaking";
 
-async function useClaim(epochs: bigint[]) {
-  const mwStaking = useMW2StakingContract();
-  const claim = await mwStaking.claim(epochs);
-  await claim.wait();
-  // TODO load staked balance
-  console.log("claimed");
-}
+export const useClaim = async (
+  mwStaking: MWStaking,
+  epochs: BigNumberish[],
+) => {
+  await mwStaking.claim(epochs);
+};

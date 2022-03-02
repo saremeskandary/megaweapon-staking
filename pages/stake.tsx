@@ -7,19 +7,30 @@ import TokenBalance from "../components/TokenBalance";
 import { Caution } from "../components/Caution";
 import type { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
-import useWeaponContract from "../hooks/useWeaponContract";
+import { useStake } from "../hooks/useStake";
 import useMW2StakingContract from "../hooks/useMW2StakingContract";
 import { parseBalance } from "../util";
 import useWeaponBalance from "../hooks/useWeaponBalance";
 import { formatEther } from "@ethersproject/units";
 
 export default function stake() {
+  const mwStaking = useMW2StakingContract();
+  const { account } = useWeb3React<Web3Provider>();
+  const [onStake, setOnStake] = useState<boolean>(false);
   const [caution, setCaution] = useState<boolean>(false);
-
+  const [stakeAmount, setStakeAmount] = useState(1n);
+  const [unstakeTime, setUnstakeTime] = useState(1n);
   useEffect(() => {
-
-  }, []);
-
+    onStake &&
+      stakeAmount &&
+      unstakeTime &&
+      useStake(account, mwStaking, stakeAmount, unstakeTime);
+    return setOnStake(false);
+  }, [onStake]);
+  function onStakeHandler(e) {
+    setOnStake(true);
+    // setCaution(true)
+  }
   return (
     <Layout>
       {caution && (
@@ -45,9 +56,7 @@ export default function stake() {
           kind="light"
           content="Stake"
           lock="icon-stake"
-          onClick={() => {
-            setCaution(true);
-          }}
+          onClick={onStakeHandler}
         />
       </Card>
       <Card>

@@ -1,7 +1,11 @@
+import { Web3Provider } from "@ethersproject/providers";
+import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import Layout from "../components/Layout";
+import { useClaim } from "../hooks/useClaim";
+import useMW2StakingContract from "../hooks/useMW2StakingContract";
 
 type Props = {};
 
@@ -29,12 +33,17 @@ const data = [
   { id: "5", week: "52", ETH: "3" },
 ];
 export default function claim({}: Props) {
+  const mwStaking = useMW2StakingContract();
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   const [list, setList] = useState([]);
+  const [epochs, setEpochs] = useState();
 
   useEffect(() => {
     setList(data);
+    console.log();
+    
+    epochs && useClaim(mwStaking, epochs);
   }, [list]);
 
   const handleSelectAll = (e) => {
@@ -53,7 +62,7 @@ export default function claim({}: Props) {
     }
   };
 
-  console.log(isCheck);
+  const handleSumbit = (e) => {};
   return (
     <Layout>
       <div className="flex self-start">
@@ -88,7 +97,12 @@ export default function claim({}: Props) {
         <div className="mb-2">
           <Button kind="light" content="Show more weeks" onClick={() => {}} />
         </div>
-        <Button full kind="dark" content="[ CONFIRM ]" onClick={() => {}} />
+        <Button
+          full
+          kind="dark"
+          content="[ CONFIRM ]"
+          onSubmit={handleSumbit}
+        />
       </form>
     </Layout>
   );
