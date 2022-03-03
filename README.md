@@ -14,11 +14,16 @@ Then run the development server:
 npm run dev
 # or
 yarn dev
-<<<<<<< HEAD
-=======
 ```
 
-# Advanced Sample Hardhat Project
+# hardhat
+
+to use hardhat 
+```bash
+npx hardhat clean
+npx hardhat compile
+npx hardhat node
+```
 
 This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
 
