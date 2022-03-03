@@ -99,7 +99,7 @@ export default function stake() {
           </div>
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
             <div className="text-lg">Total duration</div>
-            <div>3 day, 2 hours, 5 minutes</div>
+            <div>3 days, 2 hours, 5 minutes</div>
           </div>
         </div>
       </Card>
