@@ -10,6 +10,8 @@ import { useWeb3React } from "@web3-react/core";
 import { useStake } from "../hooks/useStake";
 import useMW2StakingContract from "../hooks/useMW2StakingContract";
 import { BigNumberish } from "ethers";
+import { parseBalance } from "../util";
+import useWeaponBalance from "../hooks/useWeaponBalance";
 
 export default function stake() {
   const mwStaking = useMW2StakingContract();
@@ -19,6 +21,8 @@ export default function stake() {
   const [caution, setCaution] = useState<boolean>(false);
   const [stakeAmount, setStakeAmount] = useState<BigNumberish>(1);
   const [unstakeTime, setUnstakeTime] = useState<BigNumberish>(1);
+  const { data } = useWeaponBalance(account);
+
   useEffect(() => {
     (onStake || onPeriod) &&
       stakeAmount &&
@@ -30,6 +34,7 @@ export default function stake() {
     };
   }, [onStake, onPeriod]);
 
+  // TODO if claim data
   return (
     <Layout>
       {caution && (
@@ -46,6 +51,8 @@ export default function stake() {
             id="stake"
             className=" text-center p-1 block w-full h-10 border-2 border-black dark:bg-white"
             placeholder="stake amount"
+            min={0}
+            max={parseBalance(data ?? 0)}
             onChange={(e) => {
               e.preventDefault();
               setStakeAmount(e.target.value as BigNumberish);
