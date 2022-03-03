@@ -34,7 +34,7 @@ export default function stake() {
     };
   }, [onStake, onPeriod]);
 
-  // TODO if claim data
+  // TODO if claim data is available : show caution
   return (
     <Layout>
       {caution && (
@@ -52,7 +52,7 @@ export default function stake() {
             className=" text-center p-1 block w-full h-10 border-2 border-black dark:bg-white"
             placeholder="stake amount"
             min={0}
-            max={parseBalance(data ?? 0)}
+            // max={parseBalance(data ?? 0)}
             onChange={(e) => {
               e.preventDefault();
               setStakeAmount(e.target.value as BigNumberish);
@@ -105,6 +105,7 @@ export default function stake() {
             </div>
           </div>
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
+            {/* FIXME what is the Total duration function in dapp? */}
             <div className="text-lg">Total duration</div>
             <div>3 days, 2 hours, 5 minutes</div>
           </div>
