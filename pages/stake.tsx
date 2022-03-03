@@ -9,8 +9,7 @@ import type { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import { useStake } from "../hooks/useStake";
 import useMW2StakingContract from "../hooks/useMW2StakingContract";
-import { BigNumber, BigNumberish } from "ethers";
-import { isBigNumberish } from "@ethersproject/bignumber/lib/bignumber";
+import { BigNumberish } from "ethers";
 
 export default function stake() {
   const mwStaking = useMW2StakingContract();
@@ -48,7 +47,7 @@ export default function stake() {
             className=" text-center p-1 block w-full h-10 border-2 border-black dark:bg-white"
             placeholder="stake amount"
             onChange={(e) => {
-              e.preventDefault;
+              e.preventDefault();
               setStakeAmount(e.target.value as BigNumberish);
             }}
             required
@@ -61,7 +60,7 @@ export default function stake() {
           content="Stake"
           lock="icon-stake"
           onClick={(e) => {
-            e.preventDefault;
+            e.preventDefault();
             setOnStake(true);
           }}
         />
@@ -74,7 +73,7 @@ export default function stake() {
             className="text-center p-1 block w-full h-10 border-2 border-black dark:bg-white"
             required
             onChange={(e) => {
-              e.preventDefault;
+              e.preventDefault();
               setUnstakeTime(e.target.valueAsNumber as BigNumberish);
             }}
           />
@@ -85,7 +84,7 @@ export default function stake() {
           content="Set staking period"
           lock="icon-stake"
           onClick={(e) => {
-            e.preventDefault;
+            e.preventDefault();
             setOnPeriod(true);
           }}
         />

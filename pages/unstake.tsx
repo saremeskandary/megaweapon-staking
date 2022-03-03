@@ -6,24 +6,32 @@ import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import useMW2StakingContract from "../hooks/useMW2StakingContract";
 import { useUnstake } from "../hooks/useUnstake";
+import useStakeBalance from "../hooks/useStakeBalance";
+import useWeaponContract from "../hooks/useWeaponContract";
+import { WEAPON } from "../typechain/WEAPON";
+import useWeaponBalance from "../hooks/useWeaponBalance";
+import { weaponAddress } from "../config";
+import useTokenBalance from "../hooks/useTokenBalance";
+import { parseBalance } from "../util";
+import { BigNumberish } from "ethers";
 
 type Props = {};
-
+// TODO get max stake balance and show it in input
 export default function unstake({}: Props) {
-  const [onStake, setOnUnstake] = useState<boolean>(false);
-  const [caution, setCaution] = useState<boolean>(false);
-  const mwStaking = useMW2StakingContract();
   const { account } = useWeb3React<Web3Provider>();
-  const [unstakeAmount, setUnstakeAmount] = useState();
-
+  const mwStaking = useMW2StakingContract();
+  const weapon = useWeaponContract();
+  const [onUnstake, setOnUnstake] = useState<boolean>(false);
+  const [unstakeAmount, setUnstakeAmount] = useState<BigNumberish>();
+  const { data } = useStakeBalance(account);
   useEffect(() => {
-    onStake && unstakeAmount && useUnstake(mwStaking, account, unstakeAmount);
+    onUnstake && unstakeAmount && useUnstake(mwStaking, account, unstakeAmount);
     return setOnUnstake(false);
-  }, [onStake]);
+  }, [onUnstake]);
+
   function onUnstakeHandler(e) {
+    e.preventDefault();
     setOnUnstake(true);
-    setUnstakeAmount(e.target.stakedBalance);
-    console.log();
   }
   return (
     <Layout>
@@ -41,17 +49,28 @@ export default function unstake({}: Props) {
 
         <Card dark style={{ flexDirection: "column" }}>
           <label>STAKED BALANCE:</label>
-          <input type="number" id="stakedBalance" required></input>
+          <div className="bg-white text-black text-center px-2">
+            {parseBalance(data ?? 0)}
+          </div>
           <label htmlFor="ETH amount">AMOUNT TO UNSTAKE:</label>
-          <input type="number" id="amountToStake" required></input>
+          <input
+            type="number"
+            id="amountToStake"
+            className="bg-white text-black text-center px-2"
+            min={0}
+            max={parseBalance(data ?? 0)}
+            required
+            onChange={(e) => {
+              e.preventDefault();
+              setUnstakeAmount(e.target.value as BigNumberish);
+            }}
+          ></input>
         </Card>
         <Button
           full
           kind="dark"
           content="[ CONFIRM ]"
-          onSubmit={() => {
-            onUnstakeHandler;
-          }}
+          onClick={onUnstakeHandler}
         />
       </form>
     </Layout>
