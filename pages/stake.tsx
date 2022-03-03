@@ -12,6 +12,7 @@ import useMW2StakingContract from "../hooks/useMW2StakingContract";
 import { BigNumberish } from "ethers";
 import { parseBalance } from "../util";
 import useWeaponBalance from "../hooks/useWeaponBalance";
+import useWeaponStakedBalance from "../hooks/useWeaponStakedBalance";
 
 export default function stake() {
   const mwStaking = useMW2StakingContract();
@@ -21,7 +22,7 @@ export default function stake() {
   const [caution, setCaution] = useState<boolean>(false);
   const [stakeAmount, setStakeAmount] = useState<BigNumberish>(1);
   const [unstakeTime, setUnstakeTime] = useState<BigNumberish>(1);
-  const { data } = useWeaponBalance(account);
+  const { data } = useWeaponStakedBalance(account);
 
   useEffect(() => {
     (onStake || onPeriod) &&
@@ -34,7 +35,7 @@ export default function stake() {
     };
   }, [onStake, onPeriod]);
 
-  // TODO if claim data is available : show caution
+  // TODO if claim data is  : show caution
   return (
     <Layout>
       {caution && (
@@ -100,15 +101,19 @@ export default function stake() {
         <div className="flex flex-col w-full justify-center items-center md:items-stretch">
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
             <div className="text-lg">Your balance</div>
-            <div>
-              <TokenBalance tokenAddress={weaponAddress} symbol="$WEAPON" />
-            </div>
+            <div>{parseBalance(data ?? 0)} $WEAPON</div>
           </div>
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
             {/* FIXME what is the Total duration function in dapp? */}
             <div className="text-lg">Total duration</div>
             <div>3 days, 2 hours, 5 minutes</div>
           </div>
+        </div>
+      </Card>
+      <Card>
+        <div>Your unstaked balance</div>
+        <div>
+          <TokenBalance tokenAddress={weaponAddress} symbol="$WEAPON" />
         </div>
       </Card>
     </Layout>
