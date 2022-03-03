@@ -1,5 +1,6 @@
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
+import { BigNumberish } from "ethers";
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
@@ -25,25 +26,30 @@ function ClaimInput({ id, ETH, weekNum, handleClick, isChecked }) {
   );
 }
 
+//FIXME what is the function for claim data?
 const data = [
-  { id: "1", week: "41", ETH: "3" },
-  { id: "2", week: "42", ETH: "3" },
-  { id: "3", week: "45", ETH: "3" },
-  { id: "4", week: "48", ETH: "3" },
-  { id: "5", week: "52", ETH: "3" },
+  { id: "41", week: "41", ETH: "3" },
+  { id: "42", week: "42", ETH: "3" },
+  { id: "45", week: "45", ETH: "3" },
+  { id: "48", week: "48", ETH: "3" },
+  { id: "52", week: "52", ETH: "3" },
 ];
 export default function claim({}: Props) {
   const mwStaking = useMW2StakingContract();
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   const [list, setList] = useState([]);
-  const [epochs, setEpochs] = useState();
+  const [submited, setSubmited] = useState<boolean>(false);
+  const [epochs, setEpochs] = useState<BigNumberish[]>();
+
+  useEffect(() => {
+    setEpochs(isCheck as BigNumberish[]);
+    isCheck && submited && epochs && useClaim(mwStaking, epochs);
+    return setSubmited(false);
+  }, [isCheck, submited, epochs]);
 
   useEffect(() => {
     setList(data);
-    console.log();
-    
-    epochs && useClaim(mwStaking, epochs);
   }, [list]);
 
   const handleSelectAll = (e) => {
@@ -62,7 +68,10 @@ export default function claim({}: Props) {
     }
   };
 
-  const handleSumbit = (e) => {};
+  const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmited(true);
+  };
   return (
     <Layout>
       <div className="flex self-start">
@@ -80,7 +89,11 @@ export default function claim({}: Props) {
         lock="icon-claim"
         onClick={handleSelectAll}
       />
-      <form action="" className="flex flex-col md:w-96 px-6 gap-2">
+      <form
+        action=""
+        onSubmit={handleSumbit}
+        className="flex flex-col md:w-96 px-6 gap-2"
+      >
         <Card dark style={{ flexDirection: "column" }}>
           <label>ETH REWARD AVAILABLE:</label>
           {list.map((i) => (
@@ -95,14 +108,14 @@ export default function claim({}: Props) {
           ))}
         </Card>
         <div className="mb-2">
-          <Button kind="light" content="Show more weeks" onClick={() => {}} />
+          <Button
+            type="reset"
+            kind="light"
+            content="Show more weeks"
+            onClick={() => {}}
+          />
         </div>
-        <Button
-          full
-          kind="dark"
-          content="[ CONFIRM ]"
-          onSubmit={handleSumbit}
-        />
+        <Button full type="submit" kind="dark" content="[ CONFIRM ]" />
       </form>
     </Layout>
   );
