@@ -8,10 +8,6 @@ import useMW2StakingContract from "../hooks/useMW2StakingContract";
 import { useUnstake } from "../hooks/useUnstake";
 import useStakeBalance from "../hooks/useStakeBalance";
 import useWeaponContract from "../hooks/useWeaponContract";
-import { WEAPON } from "../typechain/WEAPON";
-import useWeaponBalance from "../hooks/useWeaponBalance";
-import { weaponAddress } from "../config";
-import useTokenBalance from "../hooks/useTokenBalance";
 import { parseBalance } from "../util";
 import { BigNumberish } from "ethers";
 
