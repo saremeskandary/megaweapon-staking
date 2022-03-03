@@ -9,28 +9,28 @@ import type { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import { useStake } from "../hooks/useStake";
 import useMW2StakingContract from "../hooks/useMW2StakingContract";
-import { parseBalance } from "../util";
-import useWeaponBalance from "../hooks/useWeaponBalance";
-import { formatEther } from "@ethersproject/units";
+import { BigNumber, BigNumberish } from "ethers";
+import { isBigNumberish } from "@ethersproject/bignumber/lib/bignumber";
 
 export default function stake() {
   const mwStaking = useMW2StakingContract();
   const { account } = useWeb3React<Web3Provider>();
   const [onStake, setOnStake] = useState<boolean>(false);
+  const [onPeriod, setOnPeriod] = useState<boolean>(false);
   const [caution, setCaution] = useState<boolean>(false);
-  const [stakeAmount, setStakeAmount] = useState(1n);
-  const [unstakeTime, setUnstakeTime] = useState(1n);
+  const [stakeAmount, setStakeAmount] = useState<BigNumberish>(1);
+  const [unstakeTime, setUnstakeTime] = useState<BigNumberish>(1);
   useEffect(() => {
-    onStake &&
+    (onStake || onPeriod) &&
       stakeAmount &&
       unstakeTime &&
       useStake(account, mwStaking, stakeAmount, unstakeTime);
-    return setOnStake(false);
-  }, [onStake]);
-  function onStakeHandler(e) {
-    setOnStake(true);
-    // setCaution(true)
-  }
+    return () => {
+      setOnStake(false);
+      setOnPeriod(false);
+    };
+  }, [onStake, onPeriod]);
+
   return (
     <Layout>
       {caution && (
@@ -47,6 +47,10 @@ export default function stake() {
             id="stake"
             className=" text-center p-1 block w-full h-10 border-2 border-black dark:bg-white"
             placeholder="stake amount"
+            onChange={(e) => {
+              e.preventDefault;
+              setStakeAmount(e.target.value as BigNumberish);
+            }}
             required
           />
         </div>
@@ -56,7 +60,10 @@ export default function stake() {
           kind="light"
           content="Stake"
           lock="icon-stake"
-          onClick={onStakeHandler}
+          onClick={(e) => {
+            e.preventDefault;
+            setOnStake(true);
+          }}
         />
       </Card>
       <Card>
@@ -66,6 +73,10 @@ export default function stake() {
             id="stake"
             className="text-center p-1 block w-full h-10 border-2 border-black dark:bg-white"
             required
+            onChange={(e) => {
+              e.preventDefault;
+              setUnstakeTime(e.target.valueAsNumber as BigNumberish);
+            }}
           />
         </div>
         <Button
@@ -73,7 +84,10 @@ export default function stake() {
           kind="light"
           content="Set staking period"
           lock="icon-stake"
-          onClick={() => {}}
+          onClick={(e) => {
+            e.preventDefault;
+            setOnPeriod(true);
+          }}
         />
       </Card>
       <Card>
