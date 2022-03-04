@@ -20,6 +20,11 @@ export default function unstake({}: Props) {
   const [onUnstake, setOnUnstake] = useState<boolean>(false);
   const [unstakeAmount, setUnstakeAmount] = useState<BigNumberish>();
   const { data } = useStakeBalance(account);
+  console.log("this is data", data ?? 'test');
+  
+
+  const contract = useMW2StakingContract();
+
   useEffect(() => {
     onUnstake && unstakeAmount && useUnstake(mwStaking, account, unstakeAmount);
     return setOnUnstake(false);
@@ -33,10 +38,11 @@ export default function unstake({}: Props) {
     <Layout>
       <div className="flex self-start">
         <Button
+          type="submit"
           kind="dark"
           content="unstake $WEAPON"
           lock="icon-stake"
-          onClick={() => {}}
+          onClick={onUnstakeHandler}
         />
       </div>
 
@@ -63,6 +69,7 @@ export default function unstake({}: Props) {
           ></input>
         </Card>
         <Button
+          type="submit"
           full
           kind="dark"
           content="[ CONFIRM ]"
