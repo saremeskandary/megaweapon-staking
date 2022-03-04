@@ -6,5 +6,13 @@ export const useUnstake = async (
   account: string,
   unstakeAmount: BigNumberish
 ) => {
-  await mwStaking.unstake(account, unstakeAmount, 0 as BigNumberish);
+  mwStaking
+    ? await mwStaking.unstake(
+        account,
+        unstakeAmount as BigNumberish,
+        0 as BigNumberish
+      )
+    : console.log(
+        "you need to connect to your wallet and choose the correct network "
+      );
 };

@@ -3,7 +3,11 @@ import { MWStaking } from "../typechain/MWStaking";
 
 export const useClaim = async (
   mwStaking: MWStaking,
-  epochs: BigNumberish[],
+  epochs: BigNumberish[]
 ) => {
-  await mwStaking.claim(epochs);
+  mwStaking
+    ? await mwStaking.claim(epochs)
+    : console.log(
+        "you need to connect to your wallet and choose the correct network "
+      );
 };
