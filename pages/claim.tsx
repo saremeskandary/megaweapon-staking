@@ -1,30 +1,13 @@
-import { Web3Provider } from "@ethersproject/providers";
-import { useWeb3React } from "@web3-react/core";
-import { BigNumberish } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import Layout from "../components/Layout";
 import { useClaim } from "../hooks/useClaim";
-import useMW2StakingContract from "../hooks/useMW2StakingContract";
-
-type Props = {};
-
-function ClaimInput({ id, ETH, weekNum, handleClick, isChecked }) {
-  return (
-    <div className="flex flex-row items-center justify-between border-2 p-1 bg-cardbg-light text-cardbg-dark">
-      <input
-        id={id}
-        name={"Week #" + weekNum}
-        onChange={handleClick}
-        checked={isChecked}
-        type="checkbox"
-      ></input>
-      <div>Week #{weekNum}</div>
-      <div>{ETH} ETH</div>
-    </div>
-  );
-}
+import { useGetEpoch } from "../hooks/useGetEpoch";
+import { ClaimInput } from "../components/ClaimInput";
+import { useMW2StakingContract, useWeaponContract } from "../hooks/useContract";
+import { mwStakingAddress } from "../config";
 
 //FIXME what is the function for claim data?
 const data = [
@@ -34,8 +17,9 @@ const data = [
   { id: "48", week: "48", ETH: "3" },
   { id: "52", week: "52", ETH: "3" },
 ];
-export default function claim({}: Props) {
-  const mwStaking = useMW2StakingContract();
+export default function claim() {
+  const mwStaking = useMW2StakingContract(mwStakingAddress);
+  const weapon = useWeaponContract(mwStakingAddress);
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   const [list, setList] = useState([]);
@@ -44,7 +28,10 @@ export default function claim({}: Props) {
 
   useEffect(() => {
     setEpochs(isCheck as BigNumberish[]);
-    isCheck && submited && epochs && useClaim(mwStaking, epochs);
+    const claim = async () => {
+      await useClaim(mwStaking, epochs);
+    };
+    isCheck && submited && epochs && claim();
     return setSubmited(false);
   }, [isCheck, submited, epochs]);
 
