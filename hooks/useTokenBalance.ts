@@ -13,18 +13,18 @@ function getTokenBalance(contract: ERC20) {
 
 export default function useTokenBalance(
   address: string,
-  tokenAddress: string,
+  contractAddress: string,
   suspense = false
 ) {
-  const contract = useTokenContract(tokenAddress);
+  const contract = useTokenContract(contractAddress);
 
   const shouldFetch =
     typeof address === "string" &&
-    typeof tokenAddress === "string" &&
+    typeof contractAddress === "string" &&
     !!contract;
 
   const result = useSWR(
-    shouldFetch ? ["TokenBalance", address, tokenAddress] : null,
+    shouldFetch ? ["TokenBalance", address, contractAddress] : null,
     getTokenBalance(contract),
     {
       suspense,

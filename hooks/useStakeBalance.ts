@@ -13,17 +13,17 @@ function getStakeBalance(contract: WEAPON) {
 
 export default function useStakeBalance(
   address: string,
-  tokenAddress: string,
+  contractAddress: string,
   suspense = false
 ) {
   const contract = useWeaponContract(weaponAddress);
   const shouldFetch =
     typeof address === "string" &&
-    typeof tokenAddress === "string" &&
+    typeof contractAddress === "string" &&
     !!contract;
 
   const result = useSWR(
-    shouldFetch ? ["StakeBalance", address, tokenAddress] : null,
+    shouldFetch ? ["StakeBalance", address, contractAddress] : null,
     getStakeBalance(contract),
     {
       suspense,

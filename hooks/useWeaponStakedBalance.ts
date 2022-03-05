@@ -5,7 +5,6 @@ import type { WEAPON } from "../typechain/WEAPON";
 import { useWeaponContract } from "./useContract";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
 
-
 function getWeaponStakedBalance(contract: WEAPON) {
   return async (address: string) => {
     const balance = await contract.stakedBalanceOf(address);
@@ -16,18 +15,18 @@ function getWeaponStakedBalance(contract: WEAPON) {
 
 export default function useWeaponStakedBalance(
   address: string,
-  tokenAddress: string,
+  contractAddress: string,
   suspense = false
 ) {
   const contract = useWeaponContract(weaponAddress);
 
   const shouldFetch =
     typeof address === "string" &&
-    typeof tokenAddress === "string" &&
+    typeof contractAddress === "string" &&
     !!contract;
 
   const result = useSWR(
-    shouldFetch ? ["WeaponStakedBalance", address, tokenAddress] : null,
+    shouldFetch ? ["WeaponStakedBalance", address, contractAddress] : null,
     getWeaponStakedBalance(contract),
     {
       suspense,

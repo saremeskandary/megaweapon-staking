@@ -14,18 +14,18 @@ function getWeaponBalance(contract: WEAPON) {
 
 export default function useWeaponBalance(
   address: string,
-  tokenAddress: string,
+  contractAddress: string,
   suspense = false
 ) {
-  const contract = useWeaponContract(tokenAddress);
+  const contract = useWeaponContract(contractAddress);
 
   const shouldFetch =
     typeof address === "string" &&
-    typeof tokenAddress === "string" &&
+    typeof contractAddress === "string" &&
     !!contract;
 
   const result = useSWR(
-    shouldFetch ? ["WeaponBalance", address, tokenAddress] : null,
+    shouldFetch ? ["WeaponBalance", address, contractAddress] : null,
     getWeaponBalance(contract),
     {
       suspense,

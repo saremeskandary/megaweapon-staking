@@ -29,14 +29,14 @@ export default function useContract<T extends Contract = Contract>(
   }, [address, ABI, library, account]) as T;
 }
 
-export function useTokenContract(tokenAddress?: string) {
-  return useContract<ERC20>(tokenAddress, ERC20_ABI);
+export function useTokenContract(contractAddress?: string) {
+  return useContract<ERC20>(contractAddress, ERC20_ABI);
 }
 
-export function useWeaponContract(tokenAddress?: string) {
-  return useContract<WEAPON>(tokenAddress, weapon.abi);
+export function useWeaponContract(contractAddress?: string) {
+  return useContract<WEAPON>(contractAddress, weapon.abi);
 }
 
-export function useMW2StakingContract(tokenAddress: string) {
-  return useContract<MWStaking>(tokenAddress, mwStaking.abi);
+export function useMW2StakingContract(contractAddress: string) {
+  return useContract<MWStaking>(contractAddress, mwStaking.abi);
 }
