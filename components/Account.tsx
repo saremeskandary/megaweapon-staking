@@ -8,9 +8,10 @@ import { formatEtherscanLink, shortenHex } from "../util";
 
 type AccountProps = {
   triedToEagerConnect: boolean;
+  showENS: boolean;
 };
 
-const Account = ({ triedToEagerConnect }: AccountProps) => {
+const Account = ({ triedToEagerConnect, showENS}: AccountProps) => {
   const { active, error, activate, chainId, account, setError } =
     useWeb3React();
 
@@ -76,7 +77,9 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
         rel: "noopener noreferrer",
       }}
     >
-      {ENSName || `${shortenHex(account, 4)}`}
+      {showENS
+        ? ENSName || `${shortenHex(account, 4)}`
+        : `${shortenHex(account, 4)}`}
     </a>
   );
 };
