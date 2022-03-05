@@ -112,8 +112,14 @@ export default function stake() {
         </div>
       </Card>
       <Card>
-        <div>Your unstaked balance</div>
-        <div>{parseBalance(data ?? 0, 9, 0)} $WEAPON</div>
+        <div className="flex flex-col w-full justify-center items-center md:items-stretch">
+          <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
+            <div className="text-lg">Your unstaked balance</div>
+            <div>
+              <div>{parseBalance(data ?? 0, 9, 0)} $WEAPON</div>
+            </div>
+          </div>
+        </div>
       </Card>
     </Layout>
   );
