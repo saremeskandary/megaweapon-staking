@@ -2,33 +2,34 @@ import Layout from "../components/Layout";
 import { Card } from "../components/Card";
 import { Button } from "../components/Button";
 import { useEffect, useState } from "react";
-import { weaponAddress } from "../config";
-import TokenBalance from "../components/TokenBalance";
+import { mwStakingAddress, weaponAddress } from "../config";
 import { Caution } from "../components/Caution";
 import type { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import { useStake } from "../hooks/useStake";
-import useMW2StakingContract from "../hooks/useMW2StakingContract";
 import { BigNumberish } from "ethers";
 import { parseBalance } from "../util";
-import useWeaponBalance from "../hooks/useWeaponBalance";
 import useWeaponStakedBalance from "../hooks/useWeaponStakedBalance";
+import useWeaponBalance from "../hooks/useWeaponBalance";
+import { useMW2StakingContract, useWeaponContract } from "../hooks/useContract";
 
 export default function stake() {
-  const mwStaking = useMW2StakingContract();
+  const mwStaking = useMW2StakingContract(mwStakingAddress);
+  const weapon = useWeaponContract(weaponAddress);
   const { account } = useWeb3React<Web3Provider>();
   const [onStake, setOnStake] = useState<boolean>(false);
   const [onPeriod, setOnPeriod] = useState<boolean>(false);
   const [caution, setCaution] = useState<boolean>(false);
-  const [stakeAmount, setStakeAmount] = useState<BigNumberish>(1);
-  const [unstakeTime, setUnstakeTime] = useState<BigNumberish>(1);
-  const { data } = useWeaponStakedBalance(account);
+  const [stakeAmount, setStakeAmount] = useState<BigNumberish>();
+  const [unstakeTime, setUnstakeTime] = useState<BigNumberish>();
+  const { data: StakedBalance } = useWeaponStakedBalance(account, weaponAddress);
+  const { data } = useWeaponBalance(account, weaponAddress);
 
   useEffect(() => {
     (onStake || onPeriod) &&
       stakeAmount &&
       unstakeTime &&
-      useStake(account, mwStaking, stakeAmount, unstakeTime);
+      useStake(mwStaking, account, stakeAmount, unstakeTime);
     return () => {
       setOnStake(false);
       setOnPeriod(false);
@@ -53,7 +54,7 @@ export default function stake() {
             className=" text-center p-1 block w-full h-10 border-2 border-black dark:bg-white"
             placeholder="stake amount"
             min={0}
-            // max={parseBalance(data ?? 0)}
+            max={parseBalance(data ?? 0, 9, 0)}
             onChange={(e) => {
               e.preventDefault();
               setStakeAmount(e.target.value as BigNumberish);
@@ -100,8 +101,8 @@ export default function stake() {
       <Card>
         <div className="flex flex-col w-full justify-center items-center md:items-stretch">
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
-            <div className="text-lg">Your balance</div>
-            <div>{parseBalance(data ?? 0)} $WEAPON</div>
+            <div className="text-lg">Your staked balance</div>
+            <div>{parseBalance(StakedBalance ?? 0)} $WEAPON</div>
           </div>
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
             {/* FIXME what is the Total duration function in dapp? */}
@@ -112,9 +113,7 @@ export default function stake() {
       </Card>
       <Card>
         <div>Your unstaked balance</div>
-        <div>
-          <TokenBalance tokenAddress={weaponAddress} symbol="$WEAPON" />
-        </div>
+        <div>{parseBalance(data ?? 0, 9, 0)} $WEAPON</div>
       </Card>
     </Layout>
   );

@@ -1,7 +1,8 @@
 import useSWR from "swr";
+import { ERC20 } from "../contracts/types";
 import type { WEAPON } from "../typechain/WEAPON";
+import { useWeaponContract } from "./useContract";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
-import useWeaponContract from "./useWeaponContract";
 
 function getWeaponBalance(contract: WEAPON) {
   return async (_: string, address: string) => {
@@ -11,13 +12,20 @@ function getWeaponBalance(contract: WEAPON) {
   };
 }
 
-export default function useWeaponBalance(address: string, suspense = false) {
-  const contract = useWeaponContract();
+export default function useWeaponBalance(
+  address: string,
+  tokenAddress: string,
+  suspense = false
+) {
+  const contract = useWeaponContract(tokenAddress);
 
-  const shouldFetch = typeof address === "string" && !!contract;
+  const shouldFetch =
+    typeof address === "string" &&
+    typeof tokenAddress === "string" &&
+    !!contract;
 
   const result = useSWR(
-    shouldFetch ? ["WeaponBalance", address] : null,
+    shouldFetch ? ["WeaponBalance", address, tokenAddress] : null,
     getWeaponBalance(contract),
     {
       suspense,
