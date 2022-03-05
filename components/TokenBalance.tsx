@@ -14,7 +14,7 @@ const TokenBalance = ({ tokenAddress, symbol }: TokenBalanceProps) => {
   
   return (
     <p>
-      {parseBalance(data ?? 0)} {`${symbol}`}
+      {parseBalance(data ?? 0, 8, 2)} {`${symbol}`}
     </p>
   );
 };
