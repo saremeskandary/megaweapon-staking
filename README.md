@@ -16,7 +16,7 @@ npm run dev
 yarn dev
 ```
 
-# hardhat
+# hardhat config
 
 to use hardhat 
 ```bash
@@ -25,6 +25,31 @@ npx hardhat compile
 npx hardhat node
 ```
 
+for deploying the smart contract:
+go to `/script/deploy.ts` and set **multiSig**, **vault**, **epochRobot** addresses
+in ropsten:
+go to `hardhat.config.js` and uncomment the ropsten config
+set your test wallet private key in `.env` in `ROPSTEN_PRIVATE_KEY`
+run:
+```bash
+npx hardhat run scripts/deploy.ts --network ropsten
+```
+you have your deployed contracts addresses are in `config.ts`
+
+1- error
+`$WEAPON: must stake through staking contract`
+use hook useSetOrGetStakingContract()
+
+2- error
+`unauthorized`
+make sure your address is the one that you declered in `hardhat.config.js` as `multiSig` 
+
+3- error
+`staking currently not enabled`
+use hook useToggleStaking()
+
+----------------------
+----------------------
 This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
 
 The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
