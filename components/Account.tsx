@@ -8,7 +8,7 @@ import { formatEtherscanLink, shortenHex } from "../util";
 
 type AccountProps = {
   triedToEagerConnect: boolean;
-  showENS: boolean;
+  showENS?: boolean;
 };
 
 const Account = ({ triedToEagerConnect, showENS}: AccountProps) => {
