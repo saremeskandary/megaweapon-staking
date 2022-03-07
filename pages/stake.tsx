@@ -13,8 +13,6 @@ import useWeaponBalance from "../hooks/useWeaponBalance";
 import { useMW2StakingContract, useWeaponContract } from "../hooks/useContract";
 import useGetStake from "../hooks/useGetStake";
 import CalculateTimeLeft from "../components/CalculateTimeLeft";
-import useSetOrGetStakingContract from "../hooks/useSetAndGetStakingContract";
-import useToggleStaking from "../hooks/useToggleStaking";
 
 export default function stake() {
   const mwStaking = useMW2StakingContract(mwStakingAddress);
@@ -26,10 +24,15 @@ export default function stake() {
   const [stakeAmount, setStakeAmount] = useState<BigNumberish>();
   const [unstakeTime, setUnstakeTime] = useState<BigNumberish>();
   const { data } = useWeaponBalance(account, weaponAddress);
-  const [stakedBalance, stakeBeginTime, stakeEndTime] = useGetStake();
-  const { setClick } = useSetOrGetStakingContract();
-  const { setToggle } = useToggleStaking();
-
+  const { data: getStake } = useGetStake(account, weaponAddress);
+  let stakedBalance = "not loaded",
+    stakeBeginTime = "not loaded",
+    stakeEndTime = "not loaded";
+  if (getStake !== undefined) {
+    stakedBalance = parseBalance(getStake[0]);
+    stakeBeginTime = parseBalance(getStake[1]);
+    stakeEndTime = parseBalance(getStake[2]);
+  }
   useEffect(() => {
     (onStake || onPeriod) &&
       stakeAmount &&
@@ -53,22 +56,6 @@ export default function stake() {
           }}
         />
       )}
-      <Button
-        kind="light"
-        content="set staking contract"
-        lock="icon-stake"
-        onClick={() => {
-          setClick(true);
-        }}
-      />
-      <Button
-        kind="light"
-        content="toggle staking"
-        lock="icon-stake"
-        onClick={() => {
-          setToggle(true);
-        }}
-      />
       <Card>
         <div className="flex-1">
           <input
@@ -125,12 +112,12 @@ export default function stake() {
         <div className="flex flex-col w-full justify-center items-center md:items-stretch">
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
             <div className="text-lg">Your staked balance</div>
-            <div>{parseBalance(stakedBalance ?? 0, 9, 0)} $WEAPON</div>
+            <div>{stakedBalance} $WEAPON</div>
           </div>
           <div className="flex flex-col md:flex-row flex-wrap justify-between items-center md:items-stretch p-2">
             <div className="text-lg">Total duration</div>
             <div>
-              {parseBalance(stakeEndTime ?? 0, 0, 0) ? (
+              {stakeEndTime ? (
                 <CalculateTimeLeft a={stakeEndTime} b={new Date()} />
               ) : (
                 <div>0 days, 0 hours, 0 minutes</div>
