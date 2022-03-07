@@ -48,6 +48,12 @@ make sure your address is the one that you declered in `hardhat.config.js` as `m
 `staking currently not enabled`
 use hook useToggleStaking()
 
+4- error
+`new stake time cannot be shorter`
+
+5- error
+`previous epoch not set`
+
 ----------------------
 ----------------------
 This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
