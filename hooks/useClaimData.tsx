@@ -1,67 +1,51 @@
-// import { Web3Provider } from "@ethersproject/providers";
-// import { useWeb3React } from "@web3-react/core";
-// import { BigNumberish } from "ethers";
-// import { MWStaking } from "../typechain/MWStaking";
-// import { WEAPON } from "../typechain/WEAPON";
+import { Web3Provider } from "@ethersproject/providers";
+import { useWeb3React } from "@web3-react/core";
+import { useEffect, useState } from "react";
+import { mwStakingAddress, weaponAddress } from "../config";
+import { useMW2StakingContract, useWeaponContract } from "./useContract";
 
-// export const useGetEpoch = async (
-//   mwStaking: MWStaking,
-//   epoch: BigNumberish
-// ) => {
-//   const { epochStartDate, epochPool, epochEth } = await mwStaking.getEpoch(
-//     epoch
-//   );
-//   return { epochStartDate, epochPool, epochEth };
-// };
+export const useClaimData = () => {
+  const { account, active } = useWeb3React<Web3Provider>();
+  const mwStaking = useMW2StakingContract(mwStakingAddress);
+  const weapon = useWeaponContract(weaponAddress);
+  const [epochs, setEpochs] = useState<number[]>([]);
+  const [refresh, setRefresh] = useState<boolean>(false);
+  // TODO delete mock data
+  const [data, setData] = useState([
+    { id: "45", week: "45", ETH: "3" }, // mock data
+    { id: "48", week: "48", ETH: "3" }, // mock data
+    { id: "52", week: "52", ETH: "3" }, // mock data
+  ]);
 
-// export const useGetStake = async (weapon: WEAPON, account: string) => {
-//   const [_stakedBalance, _stakeBeginTime, _stakeEndTime] =
-//     await weapon.getStake(account);
-//   return [_stakedBalance, _stakeBeginTime, _stakeEndTime];
-// };
+  useEffect(() => {
+    if (active) {
+      async () => {
+        let i = 0;
+        const max = 20;
+        const [stakedBalance, stakeBeginTime, stakeEndTime] =
+          await weapon.getStake(account);
+        while (i < max) {
+          const [epochStartDate, epochPool, epochEth] =
+            await mwStaking.getEpoch(i);
+            setData([]) // clear data after refreshing
+          if (
+            stakeBeginTime <= epochStartDate[epochs[i]] + 86400 &&
+            stakeEndTime >= epochStartDate[epochs[i] + 1]
+          ) {
+            const share = (+stakedBalance * 1000000) / epochs[i];
+            setData((old) => [
+              ...old,
+              { id: String(i), week: String(i), ETH: String(share) },
+            ]);
+          }
+          i++;
+        }
+        console.log("claimable: ", data);
+      };
+    }
+    return setRefresh(false);
+  }, [active, refresh]);
 
-// // TODO Check values from getStake(account) against getEpoch(week)
-
-// // const { account } = useWeb3React<Web3Provider>();
-// // const weapon = useWeaponContract();
-
-// // const i = 0;
-// // const max = epochs.length;
-// // const weiToPay = 0;
-// // let _stakedBalance, _stakeBeginTime, _stakeEndTime;
-// // const a = async () => {
-// //   [_stakedBalance, _stakeBeginTime, _stakeEndTime] = await weapon.getStake(
-// //     account
-// //   );
-// // };
-// // // require (_stakedBalance > 0, "cannot claim without staked balance");
-// // if (_stakedBalance > 0) {
-// //   while (i < max) {
-// //     // require (currentEpoch > epochs[i], "epoch not closed");
-// //     // require (_stakeBeginTime <= _epochStart[epochs[i]] + 86400  && _stakeEndTime >= _epochStart[epochs[i] +1], "not eligible for this epoch");
-// //     // require (!_hasClaimedWeek[_msgSender()][epochs[i]], "already claimed");
-
-// //     const share = (_stakedBalance * 1000000) / _epochPoolSize[epochs[i]];
-// //     weiToPay += (share * _epochRewards[epochs[i]]) / 1000000;
-// //     _hasClaimedWeek[account][epochs[i]] = true;
-// //     i++;
-// //   }
-// // }
-
-// const { account } = useWeb3React<Web3Provider>();
-// const mwStaking = useMW2StakingContract();
-// const weapon = useWeaponContract();
-// const weekNumer = 52 - 1;
-// const currentEpoch = mwStaking.currentEpoch();
-
-// useGetStake(weapon, account)
-// useGetEpoch(mwStaking, weekNumer)
-
-// const i = 0;
-// const max = epochs.length;
-// const weiToPay = 0;
-
-// while (i < max) {
-
-  
-// }
+  // get eth reward on that week
+  return { data, setRefresh, setEpochs };
+};
