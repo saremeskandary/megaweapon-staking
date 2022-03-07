@@ -3,24 +3,24 @@ import { useMW2StakingContract } from "./useContract";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
+import { MWStaking } from "../typechain/MWStaking";
+import useSWR from "swr";
+import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
+import { BigNumberish } from "ethers";
 
 export default function useGetEpoch(_epoch) {
-  const { account, active } = useWeb3React<Web3Provider>();
+  const { active } = useWeb3React<Web3Provider>();
   const [epoch, setEpoch] = useState([]);
+  const [click, setClick] = useState<boolean>(false);
   const contract = useMW2StakingContract(mwStakingAddress);
-
-  async function getEpoch(account: string) {
-    const staked = await contract?.getEpoch(_epoch);
-    return staked;
-  }
 
   useEffect(() => {
     if (active) {
-      async () => {
-        // [epochStartDate ,epochPool, epochEth]
-        setEpoch(await getEpoch(account));
+      let a = async () => {
+        setEpoch(await contract.getEpoch(_epoch));
       };
     }
-  }, [active]);
-  return epoch;
+    return setClick(false);
+  }, [click]);
+  return {epoch, setClick};
 }
