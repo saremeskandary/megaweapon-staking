@@ -51,7 +51,7 @@ export default function Header({ children }: any) {
                   />
                 </div>
                 <div className="bg-blue-500 hover:bg-sky-500 text-white py-2 px-4 rounded-3xl">
-                  <Account triedToEagerConnect={triedToEagerConnect} />
+                  <Account showENS triedToEagerConnect={triedToEagerConnect} />
                 </div>
               </div>
               <div className="text-center font-consolab text-3xl">
