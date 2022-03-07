@@ -1,39 +1,21 @@
-import { BigNumber, BigNumberish } from "ethers";
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import Layout from "../components/Layout";
 import { useClaim } from "../hooks/useClaim";
-import { useGetEpoch } from "../hooks/useGetEpoch";
 import { ClaimInput } from "../components/ClaimInput";
-import { useMW2StakingContract, useWeaponContract } from "../hooks/useContract";
-import { mwStakingAddress } from "../config";
+import { useClaimData } from "../hooks/useClaimData";
 
 //FIXME what is the function for claim data?
-const data = [
-  { id: "41", week: "41", ETH: "3" },
-  { id: "42", week: "42", ETH: "3" },
-  { id: "45", week: "45", ETH: "3" },
-  { id: "48", week: "48", ETH: "3" },
-  { id: "52", week: "52", ETH: "3" },
-];
+// epoch should be week = 7 days
+// functions  =  getEpoch and addEpochs
+
 export default function claim() {
-  const mwStaking = useMW2StakingContract(mwStakingAddress);
-  const weapon = useWeaponContract(mwStakingAddress);
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   const [list, setList] = useState([]);
-  const [submited, setSubmited] = useState<boolean>(false);
-  const [epochs, setEpochs] = useState<BigNumberish[]>();
-
-  useEffect(() => {
-    setEpochs(isCheck as BigNumberish[]);
-    const claim = async () => {
-      await useClaim(mwStaking, epochs);
-    };
-    isCheck && submited && epochs && claim();
-    return setSubmited(false);
-  }, [isCheck, submited, epochs]);
+  const { setClick, setEpochs } = useClaim();
+  const { data, setRefresh } = useClaimData();
 
   useEffect(() => {
     setList(data);
@@ -46,6 +28,7 @@ export default function claim() {
       setIsCheck([]);
     }
   };
+  
 
   const handleClick = (e) => {
     const { id, checked } = e.target;
@@ -55,13 +38,15 @@ export default function claim() {
     }
   };
 
-  const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmited(true);
-  };
   return (
     <Layout>
-      <div className="flex self-start">
+      <div className="flex self-start flex-col gap-1">
+        <Button
+          kind="dark"
+          content="refresh"
+          lock="icon-claim"
+          onClick={() => setRefresh(true)}
+        />
         <Button
           kind="dark"
           content="Claim all eligible"
@@ -78,7 +63,10 @@ export default function claim() {
       />
       <form
         action=""
-        onSubmit={handleSumbit}
+        onSubmit={(e) => {
+          e.preventDefault()
+          setEpochs(isCheck)
+          setClick(true)}}
         className="flex flex-col md:w-96 px-6 gap-2"
       >
         <Card dark style={{ flexDirection: "column" }}>
@@ -99,7 +87,6 @@ export default function claim() {
             type="reset"
             kind="light"
             content="Show more weeks"
-            onClick={() => {}}
           />
         </div>
         <Button full type="submit" kind="dark" content="[ CONFIRM ]" />
