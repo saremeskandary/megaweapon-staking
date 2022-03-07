@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import { ERC20 } from "../contracts/types";
 import type { WEAPON } from "../typechain/WEAPON";
 import { useWeaponContract } from "./useContract";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
