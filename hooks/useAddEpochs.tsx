@@ -10,9 +10,10 @@ export const useAddEpochs = () => {
   const [numToAdd, setNumToAdd] = useState<BigNumberish>();
   useEffect(() => {
     const a = async () => {
-      mwStaking &&
-        firstAdd &&
-        numToAdd&& (await mwStaking.addEpochs(firstAdd, numToAdd));
+      if (mwStaking && firstAdd && numToAdd) {
+        await mwStaking.addEpochs(firstAdd, numToAdd);
+        console.log("test");
+      }
     };
     a();
     return setAddEpoch(false);
